@@ -12,8 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../cubits/auth_cubit.dart';
-
 class SigneUpScreen extends StatefulWidget {
   SigneUpScreen({super.key});
 

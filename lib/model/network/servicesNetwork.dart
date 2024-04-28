@@ -15,7 +15,8 @@ class ServicesNetwork {
         await _services.where('categoryID', isEqualTo: categoryID).get();
     servicesDataQueryList.addAll(querySnapshot.docs);
     for (int i = 0; i < servicesDataQueryList.length; i++) {
-      var URL = await getServicesImg(servicesDataQueryList[i]['image']);
+      // var URL = await getServicesImg(servicesDataQueryList[i]['image']);
+      var URL = servicesDataQueryList[i]['image'];
       print(URL);
       servicesDataList.add(Service(
               servicesDataQueryList[i].id,
@@ -31,16 +32,19 @@ class ServicesNetwork {
   }
 
   Future<String?> getServicesImg(String img) async {
+    var imgUrl;
     try {
+
       var urlRef = await firebaseStorage
           .child('images')
           .child('servicesImages')
           .child(img);
-      var imgUrl = await urlRef.getDownloadURL();
+      imgUrl = await urlRef.getDownloadURL();
       print(imgUrl);
       return imgUrl;
     } catch (e) {
-      print(e);
+      imgUrl='';
+      return imgUrl;
     }
 
     // if (urlRef != null){
@@ -48,4 +52,14 @@ class ServicesNetwork {
     // return storageImg;
     // }
   }
+
+  addNewService(String CategoryID,Map AR,Map EN)async{
+    await _services.add({'categoryID':CategoryID,'AR':AR,'EN':EN,'image':''});
+  }
+  updatingService(String serviceID, String arServiceName,String enServiceName,arDescription,enDescription)async{
+    Map AR ={'serviceName':arServiceName,'serviceDesc':arDescription};
+    Map EN ={'serviceName':enServiceName,'serviceDesc':enDescription};
+    await _services.doc(serviceID).update({'AR':AR, 'EN':EN});
+  }
+
 }

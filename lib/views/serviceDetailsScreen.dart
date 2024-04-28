@@ -1,18 +1,22 @@
 import 'package:MCC/cubits/auth_cubit.dart';
+import 'package:MCC/cubits/services_cubit.dart';
 import 'package:MCC/generated/l10n.dart';
+import 'package:MCC/model/service.dart';
 import 'package:MCC/routing/routes.dart';
 import 'package:MCC/widgets/MyButtonW.dart';
 import 'package:MCC/widgets/Mybutton.dart';
 import 'package:MCC/widgets/OurPropertiesListItem.dart';
 import 'package:MCC/widgets/customAppbar.dart';
 import 'package:MCC/widgets/homePageHelperWidgets.dart';
+import 'package:MCC/widgets/updatingServiceDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../constants/colors.dart';
-import '../model/service.dart';
 import '../widgets/OrderingServiceDialog.dart';
+
 
 class ServiceDetailsScreen extends StatelessWidget {
   Service service;
@@ -22,6 +26,10 @@ class ServiceDetailsScreen extends StatelessWidget {
 // ServiceDetailsScreen(this.service);
   @override
   Widget build(BuildContext context) {
+    print('${service.logoImgURL} hnaa');
+  ServicesCubit servicesCubit=BlocProvider.of<ServicesCubit>(context);
+  servicesCubit.serviceID=service.id;
+    servicesCubit.servicePictureURL =service.logoImgURL;
     return SafeArea(
       child: Scaffold(
         drawer: CustomDrawer(),
@@ -30,12 +38,49 @@ class ServiceDetailsScreen extends StatelessWidget {
           child: Stack(children: [
             Column(
               children: [
-                Container(
-                  height: 320.h,
-                  width: double.infinity,
-                  child:
-                      Image.network(service.logoImgURL, fit: BoxFit.fitHeight),
-                )
+                BlocBuilder<ServicesCubit, ServicesState>(
+  builder: (context, state) {
+    return state is ServicePictureLoading? Container(
+      height: 320.h,
+      child: Center(
+        child: SpinKitCircle(color: Colors.white,),
+      ),
+    ):Stack(
+      children: [      Container(
+        height: 320.h,
+        width: double.infinity,
+        child:
+        servicesCubit.servicePictureURL ==''? GestureDetector(
+            onTap: (){
+              servicesCubit.getImage();
+            }
+            ,child: Image.asset('img/addpic.jpg',fit: BoxFit.cover,)):
+        Image.network(servicesCubit.servicePictureURL!, fit: BoxFit.fitHeight),
+      ),Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+          onTap: (){
+            servicesCubit.getImage();
+          }
+          ,child: Container(
+            height: 270.h,
+
+            child: Align(
+              child: Container(
+                  decoration: BoxDecoration(color: Colors.white30,shape: BoxShape.circle)
+                  ,child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Icon(Icons.image,color: Colors.white,),
+                  )),
+              alignment: Alignment.bottomRight,
+            ),
+          ),
+        ),
+      ),]
+
+    );
+  },
+)
               ],
             ),
             Column(
@@ -127,47 +172,10 @@ class ServiceDetailsScreen extends StatelessWidget {
                   ////////////////////////  color /////////////////////////////
                   color: Theme.of(context).scaffoldBackgroundColor,
                   child: MyButton(
-                      text: S.of(context).service_request,
+                      text: 'تعديل الخدمة',
                       onClick: () {
-                        if (BlocProvider.of<AuthCubit>(context).user != null) {
-                          showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  OrderingServiceDialog(service));
-                          print('clicked');
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              // هغير اللغة هنا
-                              .showSnackBar(SnackBar(
-                                  duration: Duration(seconds: 5),
-                                  backgroundColor:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  content: Column(
-                                    children: [
-                                      Text(
-                                        S.of(context).Click_here_to_log_in,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall,
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pushReplacementNamed(
-                                                  Routes.LoginScreen);
-                                        },
-                                        child: Text(
-                                          S
-                                              .of(context)
-                                              .log_in_first_to_request_the_service,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displaySmall,
-                                        ),
-                                      ),
-                                    ],
-                                  )));
-                        }
+showDialog(context: context, builder: (context)=>UpdatingServiceDialog(service));
+
                       },
                       // textColor: Theme.of(context).focusColor,
                       // textColor: Colors.black,

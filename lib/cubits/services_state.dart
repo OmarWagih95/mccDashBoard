@@ -14,3 +14,10 @@ class ServicesPagaeFailure extends ServicesState {
   String error;
   ServicesPagaeFailure(this.error);
 }
+class AddingServiceSuccessState extends ServicesState{}
+class AddingServiceLoadingState extends ServicesState{}
+class AddingServiceFailureState extends ServicesState{}
+class ServicePictureChanged extends ServicesState{}
+class ServicePictureLoading extends ServicesState{}
+class UpdatingServiceSuccessState extends ServicesState{}
+class UpdatingServiceLoading extends ServicesState{}
