@@ -60,7 +60,9 @@ class chooseLanguages extends StatelessWidget {
                               .changeLanguages('en');
                           onBoard
                               ? Navigator.pushNamed(
-                                  context, Routes.onboargingScreen)
+                                  context,
+                                  Routes.onboargingScreen,
+                                )
                               : Navigator.pop(context);
                         },
                         style: ButtonStyle(

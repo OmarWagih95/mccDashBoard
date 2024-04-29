@@ -1,8 +1,12 @@
+import 'package:MCC/cubits/services_cubit.dart';
+import 'package:MCC/model/category.dart';
 import 'package:MCC/routing/routes.dart';
 import 'package:MCC/views/OnbordingPage.dart';
 import 'package:MCC/views/Service_detail_screen.dart';
 import 'package:MCC/views/categories_screan.dart';
 import 'package:MCC/views/categories_services_screans.dart';
+import 'package:MCC/views/navpages/crop.dart';
+import 'package:MCC/views/servicesScreen.dart';
 import 'package:MCC/views/signeupScreen.dart';
 import 'package:MCC/views/loginScreen.dart';
 import 'package:MCC/views/navpages/HomePage.dart';
@@ -10,8 +14,10 @@ import 'package:MCC/views/navpages/SettingsPage.dart';
 import 'package:MCC/views/navpages/main_page.dart';
 import 'package:MCC/views/selectLanguage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Approuter {
+  late Categoryy Categoryy_;
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.selectLanguagePage:
@@ -28,7 +34,7 @@ class Approuter {
         );
       case Routes.mainPage:
         return MaterialPageRoute(
-          builder: (_) =>  mainpage(),
+          builder: (_) => mainpage(),
         );
       case Routes.categoriesScreen:
         return MaterialPageRoute(
@@ -45,17 +51,25 @@ class Approuter {
       case Routes.LoginScreen:
         return MaterialPageRoute(
           builder: (_) => LoginScreen(),
-        ); case Routes.signeupScreen:
+        );
+
+      case Routes.signeupScreen:
         return MaterialPageRoute(
           builder: (_) => SigneUpScreen(),
         );
-      // case Routes.CategoryserviceScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => CategoryserviceScreen(
-      //       available_Services: [],
-      //       l: [],
-      //     ),
-      //   );
+      case Routes.cropScreen:
+        return MaterialPageRoute(
+          builder: (_) => cropScreen(),
+        );
+      case Routes.ServicesScreen:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) =>
+                      ServicesCubit()..getServicesData(Categoryy_.id),
+                  child: ServicesScreen(),
+                )
+            // builder: (_) => ServicesScreen(Categoryy_),
+            );
 
       default:
         return MaterialPageRoute(

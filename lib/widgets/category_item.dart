@@ -1,4 +1,5 @@
 import 'package:MCC/cubits/services_cubit.dart';
+import 'package:MCC/routing/routes.dart';
 import 'package:MCC/views/servicesScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -40,14 +41,19 @@ class categoryItem extends StatelessWidget {
       onTap: () {
         print('clicked');
         try {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                        create: (context) =>
-                            ServicesCubit()..getServicesData(categoryy.id),
-                        child: ServicesScreen(categoryy),
-                      )));
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => BlocProvider(
+          //               create: (context) =>
+          //                   ServicesCubit()..getServicesData(categoryy.id),
+          //               child: ServicesScreen(categoryy),
+          //             )));
+          Navigator.of(context).pushNamed(Routes.ServicesScreen,
+              arguments: <String, dynamic>{
+                "categoryy": categoryy,
+                "categoryy_id": categoryy.id
+              });
         } catch (e) {
           print(e);
         }

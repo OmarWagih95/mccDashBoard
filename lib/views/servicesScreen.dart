@@ -19,8 +19,9 @@ import '../widgets/MyButtonW.dart';
 import '../widgets/leftappbarUpdate.dart';
 
 class ServicesScreen extends StatefulWidget {
-  Categoryy categoryy;
-  ServicesScreen(this.categoryy);
+  // Categoryy categoryy;
+
+  ServicesScreen();
 
   @override
   State<ServicesScreen> createState() => _ServicesScreenState();
@@ -39,6 +40,10 @@ class _ServicesScreenState extends State<ServicesScreen> {
   @override
   Widget build(BuildContext context) {
     // print('why ${BlocProvider.of<AuthCubit>(context).user!.phoneNumber}');
+    var arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    var categoryy = arguments['categoryy'];
+    var categoryy_id = arguments['categoryy_id'];
 
     ServicesCubit servicesCubit = context.read<ServicesCubit>();
     return Scaffold(
@@ -68,8 +73,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 children: [
                   Text(
                     (Localizations.localeOf(context).languageCode == 'ar')
-                        ? widget.categoryy.AR['categoryName']
-                        : widget.categoryy.EN['categoryName'],
+                        ? categoryy.AR['categoryName']
+                        : categoryy.EN['categoryName'],
                     maxLines: 2,
                     style: TextStyle(
                         fontSize: 25.w,
@@ -86,14 +91,13 @@ class _ServicesScreenState extends State<ServicesScreen> {
                     builder: (context, state) {
                       return state is ServicesPageSuccess
                           ? Column(
-                            children: [
-                              Container(
+                              children: [
+                                Container(
                                   height: 500.h,
                                   child: ListView.builder(
                                       itemCount:
                                           servicesCubit.servicesDataList.length,
-                                      itemBuilder: (context, index) =>
-                                          Column(
+                                      itemBuilder: (context, index) => Column(
                                             children: [
                                               GestureDetector(
                                                 onTap: () {
@@ -119,7 +123,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
-                                                          color: Theme.of(context)
+                                                          color: Theme.of(
+                                                                  context)
                                                               .primaryColor),
                                                       color: Theme.of(context)
                                                           .primaryColorLight,
@@ -136,12 +141,14 @@ class _ServicesScreenState extends State<ServicesScreen> {
                                                       // gradient: LinearGradient(begin: Alignment.topCenter,end: Alignment.bottomLeft,colors: [Colors.black12,Colors.purple.shade200]),
                                                       // ,
                                                       borderRadius:
-                                                          BorderRadius.circular(10.h)),
+                                                          BorderRadius.circular(
+                                                              10.h)),
                                                   width: double.infinity,
                                                   height: 70.h,
                                                   child: Padding(
-                                                    padding: EdgeInsets.symmetric(
-                                                        horizontal: 15),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 15),
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -153,12 +160,15 @@ class _ServicesScreenState extends State<ServicesScreen> {
                                                                       .languageCode ==
                                                                   'ar')
                                                               ? context
-                                                                  .read<ServicesCubit>()
-                                                                  .servicesDataList[
-                                                                      index]
-                                                                  .AR['serviceName']
+                                                                      .read<
+                                                                          ServicesCubit>()
+                                                                      .servicesDataList[
+                                                                          index]
+                                                                      .AR[
+                                                                  'serviceName']
                                                               : context
-                                                                  .read<ServicesCubit>()
+                                                                  .read<
+                                                                      ServicesCubit>()
                                                                   .servicesDataList[
                                                                       index]
                                                                   .EN['serviceName'],
@@ -171,11 +181,13 @@ class _ServicesScreenState extends State<ServicesScreen> {
                                                                           context)
                                                                       .languageCode ==
                                                                   'en')
-                                                              ? Icons.arrow_circle_left
+                                                              ? Icons
+                                                                  .arrow_circle_left
                                                               : Icons
                                                                   .arrow_circle_right,
-                                                          color: Theme.of(context)
-                                                              .hoverColor,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .hoverColor,
                                                           size: 40.h,
                                                         ),
                                                       ],
@@ -183,18 +195,25 @@ class _ServicesScreenState extends State<ServicesScreen> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(height: 15.h,)
+                                              SizedBox(
+                                                height: 15.h,
+                                              )
                                             ],
                                           )),
                                 ),
-                              MyButton(text:'Add New Service',onClick:(){
-                                showDialog(context: context, builder:(context)
-                                  => AddingNewServiceDialog(widget.categoryy)
-                                 );
-                              }, textColor: Theme.of(context).hintColor,
-                      buttonColor: Theme.of(context).primaryColor)
-                            ],
-                          )
+                                MyButton(
+                                    text: 'Add New Service',
+                                    onClick: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              AddingNewServiceDialog(
+                                                  categoryy));
+                                    },
+                                    textColor: Theme.of(context).hintColor,
+                                    buttonColor: Theme.of(context).primaryColor)
+                              ],
+                            )
                           : SpinKitCircle(
                               color: Colors.black45,
                             );

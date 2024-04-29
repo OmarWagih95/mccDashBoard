@@ -179,13 +179,19 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   padding: EdgeInsets.zero,
                   decoration: BoxDecoration(),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        padding: EdgeInsets.zero,
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                      ClipRRect(
+                        borderRadius:
+                            BorderRadius.all(Radius.elliptical(300, 350)),
                         child: Image.asset(
-                          'img/mmcassits/logo_12.png',
-                          fit: BoxFit.cover,
+                          width: 120,
+                          height: 120,
+                          'img/mmcassits/logo.png',
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                     ],
@@ -197,12 +203,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   title: Text(S.of(context).Home, style: TextStyle()),
                   onTap: () {
-                    if (ModalRoute.of(context)!.settings.name ==
+                    if (ModalRoute.of(context)!.settings.arguments ==
                         Routes.mainPage) {
                       Navigator.pop(context);
                     } else {
-                      Navigator.of(context)
-                          .pushReplacementNamed(Routes.mainPage);
+                      Navigator.of(context).pushReplacementNamed(
+                        Routes.mainPage,
+                        arguments: <String, String>{
+                          'route': Routes.onboargingScreen,
+                        },
+                      );
                     }
                   },
                 ),

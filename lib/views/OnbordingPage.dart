@@ -124,7 +124,12 @@ class _welcomState extends State<onboardingPage> {
                                     onPressed: () {
                                       setOnboardingFinished();
                                       Navigator.pushNamed(
-                                          context, Routes.mainPage);
+                                        context,
+                                        Routes.mainPage,
+                                        arguments: <String, String>{
+                                          'route': Routes.onboargingScreen,
+                                        },
+                                      );
                                     },
                                     child: onbordingInputButton()),
                               )
