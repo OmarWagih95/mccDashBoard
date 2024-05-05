@@ -5,8 +5,11 @@ import 'package:MCC/cubits/SearchCupit.dart';
 import 'package:MCC/cubits/SearchCupitStates.dart';
 import 'package:MCC/cubits/login_cubit.dart';
 import 'package:MCC/model/category.dart';
+import 'package:MCC/widgets/MyButtonW.dart';
+import 'package:MCC/widgets/addingNewCategoriesDialog%20.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../cubits/home_page_cubit.dart';
@@ -42,7 +45,7 @@ class _categoriesScreenState extends State<categoriesScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 400,
+                    height: 400.h,
                     child: Center(
                       child: SpinKitCircle(
                         color: Colors.black54,
@@ -57,23 +60,24 @@ class _categoriesScreenState extends State<categoriesScreen> {
                     categoryDataList_ =
                         (context).read<HomePageCubit>().categoryDataList;
                     return Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        padding: const EdgeInsets.all(0),
-                        height: 500,
-                        child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 2.8 / 2,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10),
-                          itemBuilder: (context, index) {
-                            return categoryItem(state.filteredData[index],
-                                Theme.of(context).primaryColorLight);
-                          },
-                          itemCount: state.filteredData
-                              .length, // itemCount: BlocProvider.of<HomePageCubit>(context).categoryDataList.length,
-                        ));
+                      margin: EdgeInsets.only(top: 10.h),
+                      padding: const EdgeInsets.all(0),
+                      height: 350.h,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 2.8 / 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10),
+                        itemBuilder: (context, index) {
+                          return categoryItem(state.filteredData[index],
+                              Theme.of(context).primaryColorLight);
+                        },
+                        itemCount: state.filteredData
+                            .length, // itemCount: BlocProvider.of<HomePageCubit>(context).categoryDataList.length,
+                      ),
+                    );
                   } else {
                     return Center(child: Text('some thing wrong with search'));
                   }

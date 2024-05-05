@@ -51,6 +51,13 @@ class CategoriesNetwork {
     // return storageImg;
     // }
   }
-
+  addNewCategory(Map AR,Map EN)async{
+    await _categories.add({'AR':AR,'EN':EN,'logoIMG':''});
+  }
+  updatingCategory(String categoryID,String arCategoryName,String enCategoryName,arDescription,enDescription)async{
+    Map AR ={'categoryName':enCategoryName};
+    Map EN ={'categoryName':enCategoryName};
+    await _categories.doc(categoryID).update({'AR':AR, 'EN':EN});
+  }
 }
 

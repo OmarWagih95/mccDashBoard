@@ -11,6 +11,9 @@ import 'package:MCC/model/category.dart';
 import 'package:MCC/model/dummyData.dart';
 import 'package:MCC/model/userModel.dart';
 import 'package:MCC/services/Network_data_services.dart';
+import 'package:MCC/widgets/MyButtonW.dart';
+import 'package:MCC/widgets/addingNewCategoriesDialog%20.dart';
+import 'package:MCC/widgets/addingNewSerrviceDialog.dart';
 import 'package:MCC/widgets/leftappbarUpdate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -84,108 +87,115 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(25.h),
-                              bottomRight: Radius.circular(25.h))),
-                      // height: 160.h,
-                      width: double.infinity,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        child: Column(
-                          children: [
-                            Container(
-                                width: double.infinity,
-                                child: LeftAppBarUpdate()),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text('Dedicated to perfection,',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .merge(
-                                      GoogleFonts.aBeeZee(
-                                          // ,fontSize: 20.h
-                                          ),
-                                    )),
-                            Text(
-                              'every single time',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .merge(GoogleFonts.aBeeZee()),
-                              // GoogleFonts.aboreto(
-                              //     color:,
-                              //     fontWeight: FontWeight.bold
-                              //     ,fontSize: 20.h
-                              // ),
-                            ),
-                            BlocBuilder<SearchCubit, searchState>(
-                                builder: (context, state) {
-                              return searchbar(
-                                DUMMY_CATEGORIES: SearchCubitDUMMY_CATEGORIES,
-                                search_controller: search_controller,
-                              );
-                            }),
-                          ],
+                Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(25.h),
+                          bottomRight: Radius.circular(25.h))),
+                  // height: 160.h,
+                  width: double.infinity,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    child: Column(
+                      children: [
+                        Container(
+                            width: double.infinity,
+                            child: LeftAppBarUpdate()),
+                        SizedBox(
+                          height: 10.h,
                         ),
-                      ),
+                        Text('Dedicated to perfection,',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .merge(
+                                  GoogleFonts.aBeeZee(
+                                      // ,fontSize: 20.h
+                                      ),
+                                )),
+                        Text(
+                          'every single time',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .merge(GoogleFonts.aBeeZee()),
+                          // GoogleFonts.aboreto(
+                          //     color:,
+                          //     fontWeight: FontWeight.bold
+                          //     ,fontSize: 20.h
+                          // ),
+                        ),
+                        BlocBuilder<SearchCubit, searchState>(
+                            builder: (context, state) {
+                          return searchbar(
+                            DUMMY_CATEGORIES: SearchCubitDUMMY_CATEGORIES,
+                            search_controller: search_controller,
+                          );
+                        }),
+                      ],
                     ),
-
-                    // BlocBuilder<VisibilityCubit, VisibilityState>(
-                    //   builder: (context, state) {
-                    //     return messageText(
-                    //       isVisible: state.isVisible,
-                    //     );
-                    //   }),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 15.h, vertical: 10.h),
-                      child: Column(
+                  ),
+                ),
+                
+                // BlocBuilder<VisibilityCubit, VisibilityState>(
+                //   builder: (context, state) {
+                //     return messageText(
+                //       isVisible: state.isVisible,
+                //     );
+                //   }),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 15.h, vertical: 10.h),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment:
+                            Localizations.localeOf(context).languageCode ==
+                                    'ar'
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                        child: Text(
+                            S.of(context).choose_maintenance_service,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .merge(GoogleFonts.aBeeZee(fontSize: 17.h))
+                            // TextStyle(
+                            //     fontSize: 20, fontWeight: FontWeight.w700,color: ColorsManager.Color60Light),
+                            ),
+                      ),
+                      // Align(
+                      //     alignment:
+                      //     Localizations.localeOf(context).languageCode ==
+                      //         'ar'
+                      //         ? Alignment.centerRight
+                      //         : Alignment.centerLeft,
+                      //     child: Text(S
+                      //         .of(context)
+                      //         .then_get_best_prices_from_our_suppliers)),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Align(
-                            alignment:
-                                Localizations.localeOf(context).languageCode ==
-                                        'ar'
-                                    ? Alignment.centerRight
-                                    : Alignment.centerLeft,
-                            child: Text(
-                                S.of(context).choose_maintenance_service,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .merge(GoogleFonts.aBeeZee(fontSize: 17.h))
-                                // TextStyle(
-                                //     fontSize: 20, fontWeight: FontWeight.w700,color: ColorsManager.Color60Light),
-                                ),
-                          ),
-                          // Align(
-                          //     alignment:
-                          //     Localizations.localeOf(context).languageCode ==
-                          //         'ar'
-                          //         ? Alignment.centerRight
-                          //         : Alignment.centerLeft,
-                          //     child: Text(S
-                          //         .of(context)
-                          //         .then_get_best_prices_from_our_suppliers)),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              categoriesScreen(),
-                            ],
-                          )
+                          categoriesScreen(),
                         ],
                       ),
-                    )
-                  ],
-                )
+                      MyButton(
+                              text: 'Add New category',
+                              onClick: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      addingNewCategoriesDialog(),
+                                );
+                              },
+                              textColor: Theme.of(context).hintColor,
+                              buttonColor: Theme.of(context).primaryColor)
+                       
+                    ],
+                  ),
+                ),
               ],
             ),
           ))),

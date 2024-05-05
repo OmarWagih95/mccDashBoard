@@ -17,7 +17,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../constants/colors.dart';
 import '../widgets/OrderingServiceDialog.dart';
 
-
 class ServiceDetailsScreen extends StatelessWidget {
   Service service;
   ServiceDetailsScreen(this.service);
@@ -27,9 +26,9 @@ class ServiceDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('${service.logoImgURL} hnaa');
-  ServicesCubit servicesCubit=BlocProvider.of<ServicesCubit>(context);
-  servicesCubit.serviceID=service.id;
-    servicesCubit.servicePictureURL =service.logoImgURL;
+    ServicesCubit servicesCubit = BlocProvider.of<ServicesCubit>(context);
+    servicesCubit.serviceID = service.id;
+    servicesCubit.servicePictureURL = service.logoImgURL;
     return SafeArea(
       child: Scaffold(
         drawer: CustomDrawer(),
@@ -39,48 +38,62 @@ class ServiceDetailsScreen extends StatelessWidget {
             Column(
               children: [
                 BlocBuilder<ServicesCubit, ServicesState>(
-  builder: (context, state) {
-    return state is ServicePictureLoading? Container(
-      height: 320.h,
-      child: Center(
-        child: SpinKitCircle(color: Colors.white,),
-      ),
-    ):Stack(
-      children: [      Container(
-        height: 320.h,
-        width: double.infinity,
-        child:
-        servicesCubit.servicePictureURL ==''? GestureDetector(
-            onTap: (){
-              servicesCubit.getImage();
-            }
-            ,child: Image.asset('img/addpic.jpg',fit: BoxFit.cover,)):
-        Image.network(servicesCubit.servicePictureURL!, fit: BoxFit.fitHeight),
-      ),Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: (){
-            servicesCubit.getImage();
-          }
-          ,child: Container(
-            height: 270.h,
-
-            child: Align(
-              child: Container(
-                  decoration: BoxDecoration(color: Colors.white30,shape: BoxShape.circle)
-                  ,child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Icon(Icons.image,color: Colors.white,),
-                  )),
-              alignment: Alignment.bottomRight,
-            ),
-          ),
-        ),
-      ),]
-
-    );
-  },
-)
+                  builder: (context, state) {
+                    return state is ServicePictureLoading
+                        ? Container(
+                            height: 320.h,
+                            child: Center(
+                              child: SpinKitCircle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        : Stack(children: [
+                            Container(
+                              height: 320.h,
+                              width: double.infinity,
+                              child: servicesCubit.servicePictureURL == ''
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        servicesCubit.getImage();
+                                      },
+                                      child: Image.asset(
+                                        'img/addpic.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Image.network(
+                                      servicesCubit.servicePictureURL!,
+                                      fit: BoxFit.fitHeight),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  servicesCubit.getImage();
+                                },
+                                child: Container(
+                                  height: 270.h,
+                                  child: Align(
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white30,
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Icon(
+                                            Icons.image,
+                                            color: Colors.white,
+                                          ),
+                                        )),
+                                    alignment: Alignment.bottomRight,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]);
+                  },
+                )
               ],
             ),
             Column(
@@ -174,8 +187,10 @@ class ServiceDetailsScreen extends StatelessWidget {
                   child: MyButton(
                       text: 'تعديل الخدمة',
                       onClick: () {
-showDialog(context: context, builder: (context)=>UpdatingServiceDialog(service));
-
+                        showDialog(
+                            context: context,
+                            builder: (context) =>
+                                UpdatingServiceDialog(service));
                       },
                       // textColor: Theme.of(context).focusColor,
                       // textColor: Colors.black,

@@ -1,4 +1,5 @@
 import 'package:MCC/cubits/auth_cubit.dart';
+import 'package:MCC/cubits/home_page_cubit.dart';
 import 'package:MCC/cubits/order_cubit.dart';
 import 'package:MCC/generated/l10n.dart';
 import 'package:MCC/model/category.dart';
@@ -14,9 +15,8 @@ import '../constants/colors.dart';
 import '../cubits/services_cubit.dart';
 import '../model/service.dart';
 
-class AddingNewServiceDialog extends StatelessWidget {
-  Categoryy categoryy;
-  AddingNewServiceDialog(this.categoryy);
+class addingNewCategoriesDialog extends StatelessWidget {
+  addingNewCategoriesDialog();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ServicesCubit, ServicesState>(
@@ -27,13 +27,13 @@ class AddingNewServiceDialog extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        ServicesCubit ServiceCubit = BlocProvider.of<ServicesCubit>(context);
-        ServiceCubit.categoryID = categoryy.id;
+        HomePageCubit categoryCubit = BlocProvider.of<HomePageCubit>(context);
+        // categoryCubit.categoryID=categoryy.id;
         return Dialog(
           // backgroundColor: Colors.white,
           // surfaceTintColor: Colors.transparent,
           insetPadding: EdgeInsets.symmetric(horizontal: 10.w),
-          child: state is AddingServiceLoadingState
+          child: state is AddingCategoryLoadingState
               ? Container(
                   width: 600.w,
                   height: 600.h,
@@ -64,7 +64,7 @@ class AddingNewServiceDialog extends StatelessWidget {
                         ),
                         Expanded(
                           child: Form(
-                              key: ServiceCubit.orderFormKey,
+                              key: categoryCubit.categoryFormKey,
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -116,7 +116,7 @@ class AddingNewServiceDialog extends StatelessWidget {
                                     //             .of(context)
                                     //             .Please_write_the_description;
                                     //       } else {
-                                    //         // ServiceCubit.description = value;
+                                    //         // categoryCubit.description = value;
                                     //       }
                                     //     },
                                     //     minLines: 4,
@@ -156,9 +156,10 @@ class AddingNewServiceDialog extends StatelessWidget {
                                         textDirection: TextDirection.rtl,
                                         validator: (value) {
                                           if (value!.isNotEmpty) {
-                                            ServiceCubit.arServiceName = value;
+                                            categoryCubit.arCategoryName =
+                                                value;
                                           } else if (value.isEmpty) {
-                                            // ServiceCubit.address =
+                                            // categoryCubit.address =
                                             return 'من فضلك ادخل اسم الخدمة';
                                           }
                                         },
@@ -197,9 +198,10 @@ class AddingNewServiceDialog extends StatelessWidget {
                                         textDirection: TextDirection.rtl,
                                         validator: (value) {
                                           if (value!.isNotEmpty) {
-                                            ServiceCubit.enServiceName = value;
+                                            categoryCubit.enCategoryName =
+                                                value;
                                           } else if (value.isEmpty) {
-                                            // ServiceCubit.address =
+                                            // categoryCubit.address =
                                             return 'من فضلك ادخل اسم الخدمة';
                                           }
                                         },
@@ -225,89 +227,6 @@ class AddingNewServiceDialog extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 15.h),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text('وصف الخدمة باللغة العربية'),
-                                      ],
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      child: TextFormField(
-                                        textDirection: TextDirection.rtl,
-                                        validator: (value) {
-                                          if (value!.isNotEmpty) {
-                                            ServiceCubit.ardescription = value;
-                                          } else if (value.isEmpty) {
-                                            // ServiceCubit.address =
-                                            return 'من فضلك ادخل اسم الخدمة';
-                                          }
-                                        },
-                                        // minLines: 3,
-                                        maxLines: 3,
-                                        decoration: InputDecoration(
-                                          fillColor: ColorsManager.lighterGray,
-                                          filled: true,
-                                          // hintText: BlocProvider.of<AuthCubit>(
-                                          //         context)
-                                          //     .user!
-                                          //     .phoneNumber!,
-                                          // hintText:S.of(context).contact_number_prompt,
-                                          // hintTextDirection: TextDirection.rtl,
-                                          contentPadding: EdgeInsets.symmetric(
-                                              horizontal: 20.h, vertical: 18.h),
-                                          enabledBorder: Theme.of(context)
-                                              .inputDecorationTheme
-                                              .enabledBorder,
-                                          focusedBorder: Theme.of(context)
-                                              .inputDecorationTheme
-                                              .focusedBorder,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15.h),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text('وصف الخدمة باللغة الإنجليزية'),
-                                      ],
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      child: TextFormField(
-                                        textDirection: TextDirection.rtl,
-                                        validator: (value) {
-                                          if (value!.isNotEmpty) {
-                                            ServiceCubit.endescription = value;
-                                          } else if (value.isEmpty) {
-                                            // ServiceCubit.address =
-                                            return 'من فضلك ادخل اسم الخدمة';
-                                          }
-                                        },
-                                        // minLines: 3,
-                                        maxLines: 3,
-                                        decoration: InputDecoration(
-                                          fillColor: ColorsManager.lighterGray,
-                                          filled: true,
-                                          // hintText: BlocProvider.of<AuthCubit>(
-                                          //         context)
-                                          //     .user!
-                                          //     .phoneNumber!,
-                                          // hintText:S.of(context).contact_number_prompt,
-                                          // hintTextDirection: TextDirection.rtl,
-                                          contentPadding: EdgeInsets.symmetric(
-                                              horizontal: 20.h, vertical: 18.h),
-                                          enabledBorder: Theme.of(context)
-                                              .inputDecorationTheme
-                                              .enabledBorder,
-                                          focusedBorder: Theme.of(context)
-                                              .inputDecorationTheme
-                                              .focusedBorder,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15.h),
                                   ],
                                 ),
                               )),
@@ -315,9 +234,9 @@ class AddingNewServiceDialog extends StatelessWidget {
                         MyButton(
                             text: S.of(context).confirmation,
                             onClick: () {
-                              if (ServiceCubit.orderFormKey.currentState!
+                              if (categoryCubit.categoryFormKey.currentState!
                                   .validate()) {
-                                ServiceCubit.addNewService();
+                                categoryCubit.addNewCategory();
                                 print('tmaaaaam');
                               }
                             },

@@ -12,4 +12,15 @@ class HomePageGetDataFailure extends HomePageState {
 }
 class changingSwitchState extends HomePageState {}
 
+class AddingCategorySuccessState extends HomePageState {}
+
+class AddingCategoryLoadingState extends HomePageState {}
+
+class AddingCategoryFailureState extends HomePageState {}
+class CategoryPictureLoading extends HomePageState {}
+class CategoryPictureChanged extends HomePageState {}
+class UpdatingCategoryLoading extends HomePageState {}
+class UpdatingCategorySuccessState extends HomePageState {}
+
+
 
