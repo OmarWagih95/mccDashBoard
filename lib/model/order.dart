@@ -8,5 +8,6 @@ class OrderDetails {
   String serviceID;
   String userID;
   Service service;
-  OrderDetails(this.active,this.address,this.description,this.phoneNumber,this.userID,this.serviceID,this.service);
+  String orderID;
+  OrderDetails(this.orderID,this.active,this.address,this.description,this.phoneNumber,this.userID,this.serviceID,this.service);
 }

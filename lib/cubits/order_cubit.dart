@@ -52,4 +52,9 @@ class OrderCubit extends Cubit<OrderState> {
     }
       return FinishedOrders;
   }
+
+  finishingActiveOrders(bool active,String id)async{
+    await OrderServices().finishingActiveOrdersByID(active,id);
+
+  }
 }

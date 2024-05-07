@@ -161,6 +161,7 @@ class finishedOreders extends StatelessWidget {
                     SizedBox(width: 5.w),
                   ],
                 ),
+
               ],
             );
           },
@@ -204,8 +205,9 @@ class activeOrders extends StatelessWidget {
               backgroundColor: ColorsManager.mainColor);
         }
         if (state is GettingMyOrdersSuccessState) {
-          Fluttertoast.showToast(
-              msg: 'aldata tmaam', backgroundColor: ColorsManager.mainColor);
+          // Fluttertoast.showToast(
+          //     msg: 'aldata tmaam', backgroundColor: ColorsManager.mainColor
+          // );
         }
       },
       builder: (context, state) {
@@ -276,6 +278,24 @@ class activeOrders extends StatelessWidget {
                                     SizedBox(width: 5.w),
                                   ],
                                 ),
+                                SizedBox(height: 10.h,),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                    children:[
+                                      Directionality(
+                                        textDirection: TextDirection.rtl,
+                                        child: DropdownMenu(initialSelection: false,width: 300.w ,onSelected: (value){
+                                          print(value);
+                                          print(BlocProvider.of<OrderCubit>(context).ordersQueryDocsList![index].orderID);
+                                          BlocProvider.of<OrderCubit>(context).finishingActiveOrders(value!,
+                                              BlocProvider.of<OrderCubit>(context).ordersQueryDocsList![index].orderID);
+                                        },dropdownMenuEntries: [
+                                          DropdownMenuEntry(value: true, label: 'لم يتم الرد',style: ButtonStyle(textStyle: MaterialStatePropertyAll(TextStyle(textBaseline:TextBaseline.alphabetic)))),
+                                          DropdownMenuEntry(value: false, label: 'نم الرد'),
+                                        ]),
+                                      )
+                                    ]
+                                )
                               ],
                             ),
                           ),

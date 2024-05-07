@@ -1,8 +1,6 @@
-import 'dart:developer';
 
-import 'package:MCC/model/order.dart';
+import 'package:MCC/model/service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import './../model/service.dart';
 import './../model/order.dart';
 class OrderServices {
   final CollectionReference ordersCollection =
@@ -34,7 +32,7 @@ class OrderServices {
     for(int i =0; i<OrdersQueryDocsList.length ; i++){
       service =await getServiceDataByID(OrdersQueryDocsList[i]['serviceID']);
       print(service.AR['serviceName']);
-      OrderDetails order=OrderDetails(OrdersQueryDocsList[i]['active'], OrdersQueryDocsList[i]['address'], OrdersQueryDocsList[i]['description'], OrdersQueryDocsList[i]['phoneNumber'], OrdersQueryDocsList[i]['userID'], OrdersQueryDocsList[i]['serviceID'],service);
+      OrderDetails order=OrderDetails(OrdersQueryDocsList[i].id,OrdersQueryDocsList[i]['active'], OrdersQueryDocsList[i]['address'], OrdersQueryDocsList[i]['description'], OrdersQueryDocsList[i]['phoneNumber'], OrdersQueryDocsList[i]['userID'], OrdersQueryDocsList[i]['serviceID'],service);
       ordersData.add(order);
       print(ordersData.length);
       try{
@@ -77,5 +75,8 @@ class OrderServices {
     serviceee =await servicesCollection.doc(id).get();
     Service service= Service(id,serviceee['EN'],serviceee['AR'],serviceee['image']);
     return service;
+  }
+  finishingActiveOrdersByID(bool active, String id)async{
+    await ordersCollection.doc(id).update({'active':active});
   }
 }
