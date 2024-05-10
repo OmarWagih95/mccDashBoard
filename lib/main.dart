@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
           },
         );
       } else {
-        return Container();
+        return CircularProgressIndicator();
       }
     });
   }
