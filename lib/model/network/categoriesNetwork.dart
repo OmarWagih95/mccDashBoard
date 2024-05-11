@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 
 import '../category.dart';
 
@@ -50,6 +51,16 @@ class CategoriesNetwork {
     //
     // return storageImg;
     // }
+  }
+  Future<String?> getCategorisvidoe(String video) async {
+    try {
+      var urlRef = await firebaseStorage.child('images').child(video);
+      var imgUrl = await urlRef.getDownloadURL();
+      return imgUrl;
+    } catch (e) {
+      debugPrint('$e');
+    }
+
   }
 
 }
