@@ -1,5 +1,5 @@
-import 'package:MCC/cubits/SearchCupitStates.dart';
-import 'package:MCC/model/category.dart';
+import 'package:MccAdmin/cubits/SearchCupitStates.dart';
+import 'package:MccAdmin/model/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

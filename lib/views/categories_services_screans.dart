@@ -1,7 +1,7 @@
 // import 'dart:developer';
 //
-// import 'package:MCC/model/Services.dart';
-// import 'package:MCC/widgets/Service_item.dart';
+// import 'package:MccAdmin/model/Services.dart';
+// import 'package:MccAdmin/widgets/Service_item.dart';
 // import 'package:flutter/material.dart';
 //
 // class CategoryserviceScreen extends StatefulWidget {

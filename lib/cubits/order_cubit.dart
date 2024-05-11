@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:MCC/services/OrderServices.dart';
+import 'package:MccAdmin/services/OrderServices.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
@@ -13,7 +13,7 @@ class OrderCubit extends Cubit<OrderState> {
   String phoneNumber = '';
   String address = '';
   bool active = true;
-  List ordersQueryDocsList=[];
+  List ordersQueryDocsList = [];
   GlobalKey<FormState> orderFormKey = GlobalKey();
 
   OrderCubit() : super(OrderInitial());
@@ -28,7 +28,7 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-   Future<List>GetMyActiveOrders(String userID) async {
+  Future<List> GetMyActiveOrders(String userID) async {
     emit(GettingMyOrdersLoadingState());
     try {
       print('sh8ala asln 1');
@@ -45,11 +45,10 @@ class OrderCubit extends Cubit<OrderState> {
   Future<List<dynamic>> GetMyFinishedOrders(String userID) async {
     var FinishedOrders = [];
     try {
-       FinishedOrders =
-          await OrderServices().getFinishedOrdersByID(userID);
+      FinishedOrders = await OrderServices().getFinishedOrdersByID(userID);
     } catch (e) {
       log(e.toString());
     }
-      return FinishedOrders;
+    return FinishedOrders;
   }
 }

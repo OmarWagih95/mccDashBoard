@@ -1,4 +1,4 @@
-import 'package:MCC/cubits/LanguagesCupitStates.dart';
+import 'package:MccAdmin/cubits/LanguagesCupitStates.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LanguagesCubit extends Cubit<LanguagesState> {

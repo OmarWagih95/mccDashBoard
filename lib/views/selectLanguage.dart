@@ -1,6 +1,6 @@
-import 'package:MCC/cubits/LanguagesCupit.dart';
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/routing/routes.dart';
+import 'package:MccAdmin/cubits/LanguagesCupit.dart';
+import 'package:MccAdmin/generated/l10n.dart';
+import 'package:MccAdmin/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

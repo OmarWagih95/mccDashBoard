@@ -1,9 +1,9 @@
 import 'dart:async';
 
 
-import 'package:MCC/cubits/auth_cubit.dart';
-import 'package:MCC/views/navpages/HomePage.dart';
-import 'package:MCC/views/navpages/main_page.dart';
+import 'package:MccAdmin/cubits/auth_cubit.dart';
+import 'package:MccAdmin/views/navpages/HomePage.dart';
+import 'package:MccAdmin/views/navpages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,4 +1,4 @@
-import 'package:MCC/generated/l10n.dart';
+import 'package:MccAdmin/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';

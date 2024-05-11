@@ -1,4 +1,4 @@
-package com.example.mcc_dashboard
+package com.example.MccAdmin_dashboard
 
 import io.flutter.embedding.android.FlutterActivity
 

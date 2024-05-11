@@ -1,31 +1,36 @@
-import 'package:MCC/model/userModel.dart';
-import 'package:MCC/views/verificationScreen.dart';
+import 'package:MccAdmin/model/userModel.dart';
+import 'package:MccAdmin/views/verificationScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseUserServices{
-  String? userID ;
-  final FirebaseAuth _auth =FirebaseAuth.instance;
-  final CollectionReference usersCollection = FirebaseFirestore.instance.collection('users');
-  Future signUp(String? email, String? password, String?userName , String? phoneNumber
-      ,String? Address,)async{
+class FirebaseUserServices {
+  String? userID;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
+  Future signUp(
+    String? email,
+    String? password,
+    String? userName,
+    String? phoneNumber,
+    String? Address,
+  ) async {
     // try{
-    await _auth.createUserWithEmailAndPassword(email: email!, password: password!).then((value){
+    await _auth
+        .createUserWithEmailAndPassword(email: email!, password: password!)
+        .then((value) {
       if (value != null) {
         print('$value hna flmodel');
-        if(value.user! !=null){
+        if (value.user! != null) {
           print('mwgoood ya 3m');
-        }
-        else{
+        } else {
           print('msh mwgoooud');
         }
         print(value.user!.uid);
-         userID = value.user!.uid;
+        userID = value.user!.uid;
         // userController.userID=userID;
-
-
       }
-    } );
+    });
 
     // }
     // catch(e){
@@ -34,65 +39,65 @@ class FirebaseUserServices{
     // print('done');
     return true;
   }
-   Future<bool> checkAccountIsVerified()async{
-     await FirebaseAuth.instance.currentUser!.reload();
 
-     var user =await _auth.currentUser;
-    print (user);
+  Future<bool> checkAccountIsVerified() async {
+    await FirebaseAuth.instance.currentUser!.reload();
+
+    var user = await _auth.currentUser;
+    print(user);
     var isVerified = user!.emailVerified;
 
     print(isVerified);
     if (isVerified) {
-return true;
-    }
-    else{
-return false;
+      return true;
+    } else {
+      return false;
       // await sendVerificationEmail();
 
       // Get.toNamed(verificationScreenRoute);
     }
   }
-  Future sendVerificationEmail()async{
-    final user =await _auth.currentUser;
 
+  Future sendVerificationEmail() async {
+    final user = await _auth.currentUser;
 
     await user!.sendEmailVerification();
     // userInfo(userID);
-
   }
- // Future userInfo (String email,String userName,String phoneNumber, String address )async{
- //    print('asht8lttttttt');
- //    print(email);print(userName);print(phoneNumber);print(address);
- //    print(userID);
- //    print('here');
- //    await usersCollection.doc('1').set({
- //      'email': email!,
- //      'userName': userName!,
- //      'phoneNumber': phoneNumber!,
- //      'address': address!
- //    }).then((value) => print('success'));
- //  }
-  Future login(String email,String password)async{
+
+  // Future userInfo (String email,String userName,String phoneNumber, String address )async{
+  //    print('asht8lttttttt');
+  //    print(email);print(userName);print(phoneNumber);print(address);
+  //    print(userID);
+  //    print('here');
+  //    await usersCollection.doc('1').set({
+  //      'email': email!,
+  //      'userName': userName!,
+  //      'phoneNumber': phoneNumber!,
+  //      'address': address!
+  //    }).then((value) => print('success'));
+  //  }
+  Future login(String email, String password) async {
     await _auth.signInWithEmailAndPassword(email: email, password: password);
     var test = await _auth.currentUser!.uid;
     print('user ${test}');
   }
 
-  Future signOut()async{
-   await _auth.signOut();
-
+  Future signOut() async {
+    await _auth.signOut();
   }
 
-  Future<userModel>getUserData()async{
+  Future<userModel> getUserData() async {
     // await _auth.userChanges();
     // await _auth.currentUser!.reload();
-    String? userID= await _auth.currentUser!.uid;
+    String? userID = await _auth.currentUser!.uid;
     print('${userID} currentUser');
-    var userData = await FirebaseFirestore.instance.collection('users').doc(userID).get();
+    var userData =
+        await FirebaseFirestore.instance.collection('users').doc(userID).get();
     print('${userID} get user ahu');
-    userModel user=await userModel(userID,userData['email'],userData['userName'],userData['phoneNumber'],userData['address']);
+    userModel user = await userModel(userID, userData['email'],
+        userData['userName'], userData['phoneNumber'], userData['address']);
     print('test ${user.userName}');
     return user;
   }
-
 }

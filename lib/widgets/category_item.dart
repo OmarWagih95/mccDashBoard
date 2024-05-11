@@ -1,6 +1,6 @@
-import 'package:MCC/cubits/services_cubit.dart';
-import 'package:MCC/routing/routes.dart';
-import 'package:MCC/views/servicesScreen.dart';
+import 'package:MccAdmin/cubits/services_cubit.dart';
+import 'package:MccAdmin/routing/routes.dart';
+import 'package:MccAdmin/views/servicesScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

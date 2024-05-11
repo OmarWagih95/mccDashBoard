@@ -1,15 +1,15 @@
-import 'package:MCC/constants/colors.dart';
-import 'package:MCC/cubits/auth_cubit.dart';
-import 'package:MCC/cubits/login_cubit.dart';
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/helpers/spacing.dart';
-import 'package:MCC/routing/routes.dart';
-import 'package:MCC/styles/Styles.dart';
-import 'package:MCC/views/navpages/HomePage.dart';
+import 'package:MccAdmin/constants/colors.dart';
+import 'package:MccAdmin/cubits/auth_cubit.dart';
+import 'package:MccAdmin/cubits/login_cubit.dart';
+import 'package:MccAdmin/generated/l10n.dart';
+import 'package:MccAdmin/helpers/spacing.dart';
+import 'package:MccAdmin/routing/routes.dart';
+import 'package:MccAdmin/styles/Styles.dart';
+import 'package:MccAdmin/views/navpages/HomePage.dart';
 
-import 'package:MCC/views/navpages/main_page.dart';
-import 'package:MCC/views/signeupScreen.dart';
-import 'package:MCC/widgets/MyTextFormField.dart';
+import 'package:MccAdmin/views/navpages/main_page.dart';
+import 'package:MccAdmin/views/signeupScreen.dart';
+import 'package:MccAdmin/widgets/MyTextFormField.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

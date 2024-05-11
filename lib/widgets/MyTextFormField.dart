@@ -1,5 +1,5 @@
-import 'package:MCC/constants/colors.dart';
-import 'package:MCC/styles/Styles.dart';
+import 'package:MccAdmin/constants/colors.dart';
+import 'package:MccAdmin/styles/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,13 +10,14 @@ class MyTextFormfield extends StatelessWidget {
   final bool isSecured;
   final String hintText;
   String? Function(String?)? validation;
-   MyTextFormfield({
+  MyTextFormfield({
     this.validation,
     super.key,
     this.isSecured = false,
     this.controller,
     required this.hintText,
-    this.suffexicon, this.prifixicon,
+    this.suffexicon,
+    this.prifixicon,
   });
 
   @override

@@ -1,10 +1,10 @@
 // ignore: camel_case_types
 
-import 'package:MCC/constants/colors.dart';
-import 'package:MCC/cubits/SearchCupit.dart';
-import 'package:MCC/cubits/SearchCupitStates.dart';
-import 'package:MCC/cubits/login_cubit.dart';
-import 'package:MCC/model/category.dart';
+import 'package:MccAdmin/constants/colors.dart';
+import 'package:MccAdmin/cubits/SearchCupit.dart';
+import 'package:MccAdmin/cubits/SearchCupitStates.dart';
+import 'package:MccAdmin/cubits/login_cubit.dart';
+import 'package:MccAdmin/model/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

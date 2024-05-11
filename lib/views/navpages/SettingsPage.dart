@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:MCC/constants/colors.dart';
-import 'package:MCC/cubits/LanguagesCupit.dart';
-import 'package:MCC/cubits/darkModeCubit.dart';
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/helpers/constants.dart';
-import 'package:MCC/routing/routes.dart';
-import 'package:MCC/views/navpages/main_page.dart';
-import 'package:MCC/views/selectLanguage.dart';
-import 'package:MCC/widgets/SettingsListItem.dart';
+import 'package:MccAdmin/constants/colors.dart';
+import 'package:MccAdmin/cubits/LanguagesCupit.dart';
+import 'package:MccAdmin/cubits/darkModeCubit.dart';
+import 'package:MccAdmin/generated/l10n.dart';
+import 'package:MccAdmin/helpers/constants.dart';
+import 'package:MccAdmin/routing/routes.dart';
+import 'package:MccAdmin/views/navpages/main_page.dart';
+import 'package:MccAdmin/views/selectLanguage.dart';
+import 'package:MccAdmin/widgets/SettingsListItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
       SocialMedia.snapShat: 'https://snapchat.com/t/MZTopzJP',
       SocialMedia.email: 'https://mail.google.com/mail',
       SocialMedia.instgram:
-          'https://www.instagram.com/memar_corner_mcc?igsh=bGp2Z3g0YWk0NWRv&utm_source=qr',
+          'https://www.instagram.com/memar_corner_MccAdmin?igsh=bGp2Z3g0YWk0NWRv&utm_source=qr',
       SocialMedia.whatsapp: 'https://wa.me/+97455678226',
     };
     final url = Uri.parse('${urls[SocialMediaPlatform]}');
@@ -83,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingsListItem(Icons.share, S.of(context).Share_Application,
                 () async {
               Share.share('check out our website soon at https://example.com',
-                  subject: 'welcome to MCC ');
+                  subject: 'welcome to MccAdmin ');
             }),
             SettingsListItem(Icons.info, S.of(context).Who_Are, () {}),
             SettingsListItem(Icons.person, S.of(context).Sign_IN, () {
