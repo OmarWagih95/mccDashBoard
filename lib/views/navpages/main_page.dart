@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:MCC/cash/shared_pref.dart';
-import 'package:MCC/cubits/auth_cubit.dart';
-import 'package:MCC/cubits/login_cubit.dart';
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/helpers/constants.dart';
-import 'package:MCC/services/Network_data_services.dart';
-import 'package:MCC/views/loginScreen.dart';
-import 'package:MCC/views/navpages/SettingsPage.dart';
+import 'package:MCCAdmin/cash/shared_pref.dart';
+import 'package:MCCAdmin/cubits/auth_cubit.dart';
+import 'package:MCCAdmin/cubits/login_cubit.dart';
+import 'package:MCCAdmin/generated/l10n.dart';
+import 'package:MCCAdmin/helpers/constants.dart';
+import 'package:MCCAdmin/services/Network_data_services.dart';
+import 'package:MCCAdmin/views/loginScreen.dart';
+import 'package:MCCAdmin/views/navpages/SettingsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,7 +91,7 @@ class _mainpageState extends State<mainpage> {
   Widget build(BuildContext context) {
     changeremoteindex = changeremoteindexhelper;
     Islogin = CashHelper.getBool(key: 'Islogin') ?? false;
-    return WillPopScope (
+    return WillPopScope(
       onWillPop: _systemBackButtonPressed,
       child: Scaffold(
         bottomNavigationBar: NavigationBar(

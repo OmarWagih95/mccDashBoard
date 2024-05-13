@@ -1,9 +1,9 @@
-import 'package:MCC/cash/shared_pref.dart';
-import 'package:MCC/constants/colors.dart';
-import 'package:MCC/cubits/LanguagesCupit.dart';
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/helpers/constants.dart';
-import 'package:MCC/routing/routes.dart';
+import 'package:MCCAdmin/cash/shared_pref.dart';
+import 'package:MCCAdmin/constants/colors.dart';
+import 'package:MCCAdmin/cubits/LanguagesCupit.dart';
+import 'package:MCCAdmin/generated/l10n.dart';
+import 'package:MCCAdmin/helpers/constants.dart';
+import 'package:MCCAdmin/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

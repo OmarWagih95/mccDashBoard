@@ -1,7 +1,7 @@
-import 'package:MCC/cubits/auth_cubit.dart';
-import 'package:MCC/cubits/order_cubit.dart';
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/widgets/MyButtonW.dart';
+import 'package:MCCAdmin/cubits/auth_cubit.dart';
+import 'package:MCCAdmin/cubits/order_cubit.dart';
+import 'package:MCCAdmin/generated/l10n.dart';
+import 'package:MCCAdmin/widgets/MyButtonW.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -118,23 +118,21 @@ class OrderingServiceDialog extends StatelessWidget {
                                         minLines: 4,
                                         maxLines: 6,
                                         decoration: InputDecoration(
-                                            fillColor:
-                                                ColorsManager.lighterGray,
-                                            filled: true,
-                                            hintText: S
-                                                .of(context)
-                                                .detailed_description_prompt,
-                                            // hintTextDirection: TextDirection.rtl,
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 20.h,
-                                                    vertical: 18.h),
-                                            enabledBorder: Theme.of(context)
-                                                .inputDecorationTheme
-                                                .enabledBorder,
-                                            focusedBorder: Theme.of(context)
-                                                .inputDecorationTheme
-                                                .focusedBorder,),
+                                          fillColor: ColorsManager.lighterGray,
+                                          filled: true,
+                                          hintText: S
+                                              .of(context)
+                                              .detailed_description_prompt,
+                                          // hintTextDirection: TextDirection.rtl,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 20.h, vertical: 18.h),
+                                          enabledBorder: Theme.of(context)
+                                              .inputDecorationTheme
+                                              .enabledBorder,
+                                          focusedBorder: Theme.of(context)
+                                              .inputDecorationTheme
+                                              .focusedBorder,
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
@@ -178,11 +176,11 @@ class OrderingServiceDialog extends StatelessWidget {
                                           contentPadding: EdgeInsets.symmetric(
                                               horizontal: 20.h, vertical: 18.h),
                                           enabledBorder: Theme.of(context)
-                                                .inputDecorationTheme
-                                                .enabledBorder,
-                                            focusedBorder: Theme.of(context)
-                                                .inputDecorationTheme
-                                                .focusedBorder,
+                                              .inputDecorationTheme
+                                              .enabledBorder,
+                                          focusedBorder: Theme.of(context)
+                                              .inputDecorationTheme
+                                              .focusedBorder,
                                         ),
                                       ),
                                     ),
@@ -223,12 +221,12 @@ class OrderingServiceDialog extends StatelessWidget {
                                           // hintTextDirection: TextDirection.rtl,
                                           contentPadding: EdgeInsets.symmetric(
                                               horizontal: 20.h, vertical: 18.h),
-                                        enabledBorder: Theme.of(context)
-                                                .inputDecorationTheme
-                                                .enabledBorder,
-                                            focusedBorder: Theme.of(context)
-                                                .inputDecorationTheme
-                                                .focusedBorder,
+                                          enabledBorder: Theme.of(context)
+                                              .inputDecorationTheme
+                                              .enabledBorder,
+                                          focusedBorder: Theme.of(context)
+                                              .inputDecorationTheme
+                                              .focusedBorder,
                                         ),
                                       ),
                                     ),

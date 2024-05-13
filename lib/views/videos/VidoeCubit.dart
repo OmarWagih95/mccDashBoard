@@ -1,4 +1,4 @@
-import 'package:MCC/model/network/categoriesNetwork.dart';
+import 'package:MCCAdmin/model/network/categoriesNetwork.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class VidoesState {}

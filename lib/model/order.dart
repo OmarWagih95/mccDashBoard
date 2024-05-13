@@ -1,4 +1,4 @@
-import 'package:MCC/model/service.dart';
+import 'package:MCCAdmin/model/service.dart';
 
 class OrderDetails {
   bool active;
@@ -8,5 +8,6 @@ class OrderDetails {
   String serviceID;
   String userID;
   Service service;
-  OrderDetails(this.active,this.address,this.description,this.phoneNumber,this.userID,this.serviceID,this.service);
+  OrderDetails(this.active, this.address, this.description, this.phoneNumber,
+      this.userID, this.serviceID, this.service);
 }

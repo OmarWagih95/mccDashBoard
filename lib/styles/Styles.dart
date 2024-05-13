@@ -1,11 +1,13 @@
-import 'package:MCC/constants/colors.dart';
+import 'package:MCCAdmin/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Textstyles {
-  static TextStyle font24bluewbold =  TextStyle(
-      fontSize: 32, fontWeight: Fonthelper.bold, color: ColorsManager.mainColor);
-  static TextStyle font14blueregular =  TextStyle(
+  static TextStyle font24bluewbold = TextStyle(
+      fontSize: 32,
+      fontWeight: Fonthelper.bold,
+      color: ColorsManager.mainColor);
+  static TextStyle font14blueregular = TextStyle(
       fontSize: 14,
       fontWeight: Fonthelper.regular,
       color: ColorsManager.mainColor);
@@ -33,7 +35,7 @@ class Textstyles {
       color: ColorsManager.darkGray);
   static TextStyle font13blackregular = const TextStyle(
       fontSize: 13, fontWeight: Fonthelper.regular, color: Colors.black);
-  static TextStyle font13bluewbold =  TextStyle(
+  static TextStyle font13bluewbold = TextStyle(
       fontSize: 13,
       fontWeight: Fonthelper.regular,
       color: ColorsManager.mainColor);

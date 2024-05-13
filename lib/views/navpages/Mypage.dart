@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:MCC/constants/colors.dart';
-import 'package:MCC/cubits/auth_cubit.dart';
-import 'package:MCC/cubits/home_page_cubit.dart';
-import 'package:MCC/cubits/order_cubit.dart';
-import 'package:MCC/cubits/services_cubit.dart';
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/widgets/homePageHelperWidgets.dart';
+import 'package:MCCAdmin/constants/colors.dart';
+import 'package:MCCAdmin/cubits/auth_cubit.dart';
+import 'package:MCCAdmin/cubits/home_page_cubit.dart';
+import 'package:MCCAdmin/cubits/order_cubit.dart';
+import 'package:MCCAdmin/cubits/services_cubit.dart';
+import 'package:MCCAdmin/generated/l10n.dart';
+import 'package:MCCAdmin/widgets/homePageHelperWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -112,7 +112,9 @@ class finishedOreders extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             /////////////////////new/////////
             String ServiceName = showServiceName(
-                BlocProvider.of<OrderCubit>(context).ordersQueryDocsList![index].serviceID,
+                BlocProvider.of<OrderCubit>(context)
+                    .ordersQueryDocsList![index]
+                    .serviceID,
                 context);
             log(ServiceName);
             return Column(
@@ -272,7 +274,12 @@ class activeOrders extends StatelessWidget {
                                     Text(S.of(context).ServiceName),
                                     Spacer(),
                                     Expanded(
-                                        child: Text(BlocProvider.of<OrderCubit>(context).ordersQueryDocsList![index].service.AR['serviceName'], maxLines: 2)),
+                                        child: Text(
+                                            BlocProvider.of<OrderCubit>(context)
+                                                .ordersQueryDocsList![index]
+                                                .service
+                                                .AR['serviceName'],
+                                            maxLines: 2)),
                                     SizedBox(width: 5.w),
                                   ],
                                 ),

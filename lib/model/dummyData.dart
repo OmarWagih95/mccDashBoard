@@ -1,5 +1,5 @@
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/model/category.dart';
+import 'package:MCCAdmin/generated/l10n.dart';
+import 'package:MCCAdmin/model/category.dart';
 import 'package:flutter/material.dart';
 import 'Services.dart';
 

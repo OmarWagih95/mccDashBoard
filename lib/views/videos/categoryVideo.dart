@@ -1,4 +1,4 @@
-import 'package:MCC/generated/l10n.dart';
+import 'package:MCCAdmin/generated/l10n.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

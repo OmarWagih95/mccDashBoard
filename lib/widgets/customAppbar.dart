@@ -1,5 +1,5 @@
-import 'package:MCC/generated/l10n.dart';
-import 'package:MCC/widgets/homePageHelperWidgets.dart';
+import 'package:MCCAdmin/generated/l10n.dart';
+import 'package:MCCAdmin/widgets/homePageHelperWidgets.dart';
 import 'package:flutter/material.dart';
 
 class customAppbar extends StatelessWidget {

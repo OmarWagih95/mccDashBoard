@@ -19,21 +19,21 @@
             "program": "lib/main.dart", // ملف الـ Dart الرئيسي لتطبيقك
           },
         {
-            "name": "mcc24",
-            "cwd": "mcc24",
+            "name": "MCCAdmin24",
+            "cwd": "MCCAdmin24",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "mcc24 (profile mode)",
-            "cwd": "mcc24",
+            "name": "MCCAdmin24 (profile mode)",
+            "cwd": "MCCAdmin24",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "mcc24 (release mode)",
-            "cwd": "mcc24",
+            "name": "MCCAdmin24 (release mode)",
+            "cwd": "MCCAdmin24",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

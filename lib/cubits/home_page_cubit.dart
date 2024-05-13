@@ -1,4 +1,4 @@
-import 'package:MCC/model/network/categoriesNetwork.dart';
+import 'package:MCCAdmin/model/network/categoriesNetwork.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,25 +12,24 @@ class HomePageCubit extends Cubit<HomePageState> {
   HomePageCubit() : super(HomePageInitial());
   // final CollectionReference _categories =FirebaseFirestore.instance.collection('categories');
   // Reference get firebaseStorage => FirebaseStorage.instance.ref();
-  List<Categoryy> categoryDataList=[];
-  getCategoriesData()async{
-      emit(HomePageGetDataLoading());
-      try{
-        categoryDataList.clear();
-    categoryDataList=await CategoriesNetwork().getCategoriesData(categoryDataList);
-    emit(HomePageGetDataSuccessed());
-      }
-      catch(e){
-        emit(HomePageGetDataFailure(e.toString()));
-      }
-
+  List<Categoryy> categoryDataList = [];
+  getCategoriesData() async {
+    emit(HomePageGetDataLoading());
+    try {
+      categoryDataList.clear();
+      categoryDataList =
+          await CategoriesNetwork().getCategoriesData(categoryDataList);
+      emit(HomePageGetDataSuccessed());
+    } catch (e) {
+      emit(HomePageGetDataFailure(e.toString()));
     }
-  bool darkMode=false;
-changeSwitch(bool x){
-  darkMode=x;
-  emit(changingSwitchState());
-}
+  }
 
+  bool darkMode = false;
+  changeSwitch(bool x) {
+    darkMode = x;
+    emit(changingSwitchState());
+  }
 
 //  getCategoriesData ()async{
   //   emit(HomePageGetDataLoading());

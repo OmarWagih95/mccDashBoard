@@ -1,14 +1,14 @@
-import 'package:MCC/routing/routes.dart';
-import 'package:MCC/views/OnbordingPage.dart';
-import 'package:MCC/views/Service_detail_screen.dart';
-import 'package:MCC/views/categories_screan.dart';
-import 'package:MCC/views/categories_services_screans.dart';
-import 'package:MCC/views/signeupScreen.dart';
-import 'package:MCC/views/loginScreen.dart';
-import 'package:MCC/views/navpages/HomePage.dart';
-import 'package:MCC/views/navpages/SettingsPage.dart';
-import 'package:MCC/views/navpages/main_page.dart';
-import 'package:MCC/views/selectLanguage.dart';
+import 'package:MCCAdmin/routing/routes.dart';
+import 'package:MCCAdmin/views/OnbordingPage.dart';
+import 'package:MCCAdmin/views/Service_detail_screen.dart';
+import 'package:MCCAdmin/views/categories_screan.dart';
+import 'package:MCCAdmin/views/categories_services_screans.dart';
+import 'package:MCCAdmin/views/signeupScreen.dart';
+import 'package:MCCAdmin/views/loginScreen.dart';
+import 'package:MCCAdmin/views/navpages/HomePage.dart';
+import 'package:MCCAdmin/views/navpages/SettingsPage.dart';
+import 'package:MCCAdmin/views/navpages/main_page.dart';
+import 'package:MCCAdmin/views/selectLanguage.dart';
 import 'package:flutter/material.dart';
 
 class Approuter {
@@ -28,7 +28,7 @@ class Approuter {
         );
       case Routes.mainPage:
         return MaterialPageRoute(
-          builder: (_) =>  mainpage(),
+          builder: (_) => mainpage(),
         );
       case Routes.categoriesScreen:
         return MaterialPageRoute(
@@ -45,7 +45,8 @@ class Approuter {
       case Routes.LoginScreen:
         return MaterialPageRoute(
           builder: (_) => LoginScreen(),
-        ); case Routes.signeupScreen:
+        );
+      case Routes.signeupScreen:
         return MaterialPageRoute(
           builder: (_) => SigneUpScreen(),
         );
