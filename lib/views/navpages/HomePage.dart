@@ -36,25 +36,23 @@ GlobalKey<NavigatorState> HomePageNavigatorKey = GlobalKey<NavigatorState>();
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    late userModel? user = BlocProvider.of<AuthCubit>(context).user;
-    // TODO: implement initState
-    // print(BlocProvider.of<AuthCubit>(context).user!.userID!);
-    getUserDate() async {
-      print('hna1');
-      try {
-        user = await BlocProvider.of<AuthCubit>(context).getUserData();
-        print('${user!.userID!} test main user');
-      } catch (e) {
-        print(e);
-      }
-    }
 
-    try {
-      getUserDate();
-      print('userData tmaaam');
-    } catch (e) {
-      print(e);
-    }
+    // getUserDate() async {
+    //   print('hna1');
+    //   try {
+    //      await BlocProvider.of<AuthCubit>(context).getUserData();
+    //     // print('${user!.userID!} test main user');
+    //   } catch (e) {
+    //     print(e);
+    //   }
+    // }
+
+    // try {
+    //   getUserDate();
+    //   print('userData tmaaam');
+    // } catch (e) {
+    //   print(e);
+    // }
     BlocProvider.of<HomePageCubit>(context).getCategoriesData();
   }
 
@@ -70,12 +68,6 @@ class _HomePageState extends State<HomePage> {
         BlocProvider<SearchCubit>(create: (BuildContext context) {
           return SearchCubit(SearchCubitDUMMY_CATEGORIES, context);
         }),
-        BlocProvider<VisibilityCubit>(
-          create: (BuildContext context) => VisibilityCubit(),
-        ),
-        BlocProvider<ServicesCubit>(
-          create: (BuildContext context) => ServicesCubit(),
-        ),
       ],
       child: Scaffold(
           drawer: CustomDrawer(),
@@ -137,13 +129,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-
-                    // BlocBuilder<VisibilityCubit, VisibilityState>(
-                    //   builder: (context, state) {
-                    //     return messageText(
-                    //       isVisible: state.isVisible,
-                    //     );
-                    //   }),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 15.h, vertical: 10.h),
@@ -160,27 +145,10 @@ class _HomePageState extends State<HomePage> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleLarge!
-                                    .merge(GoogleFonts.aBeeZee(fontSize: 17.h))
-                                // TextStyle(
-                                //     fontSize: 20, fontWeight: FontWeight.w700,color: ColorsManager.Color60Light),
-                                ),
+                                    .merge(
+                                        GoogleFonts.aBeeZee(fontSize: 17.h))),
                           ),
-                          // Align(
-                          //     alignment:
-                          //     Localizations.localeOf(context).languageCode ==
-                          //         'ar'
-                          //         ? Alignment.centerRight
-                          //         : Alignment.centerLeft,
-                          //     child: Text(S
-                          //         .of(context)
-                          //         .then_get_best_prices_from_our_suppliers)),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              categoriesScreen(),
-                            ],
-                          )
+                          categoriesScreen()
                         ],
                       ),
                     )
