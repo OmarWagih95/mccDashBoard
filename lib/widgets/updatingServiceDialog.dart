@@ -2,7 +2,6 @@ import 'package:MCCAdmin/cubits/auth_cubit.dart';
 import 'package:MCCAdmin/cubits/order_cubit.dart';
 import 'package:MCCAdmin/generated/l10n.dart';
 import 'package:MCCAdmin/model/category.dart';
-import 'package:MCCAdmin/views/navpages/main_page%20copy.dart';
 import 'package:MCCAdmin/widgets/MyButtonW.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,6 +13,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../constants/colors.dart';
 import '../cubits/services_cubit.dart';
 import '../model/service.dart';
+import '../views/navpages/main_page.dart';
 
 class UpdatingServiceDialog extends StatelessWidget {
   Service service;
@@ -43,7 +43,6 @@ class UpdatingServiceDialog extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => mainpage(
                       is_login: true,
-                      navigationIndexfromRouting: 2,
                     ),
                   ));
             }

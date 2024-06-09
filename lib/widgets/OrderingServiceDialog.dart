@@ -1,9 +1,9 @@
 import 'package:MCCAdmin/cubits/auth_cubit.dart';
 import 'package:MCCAdmin/cubits/order_cubit.dart';
 import 'package:MCCAdmin/generated/l10n.dart';
+import 'package:MCCAdmin/views/navpages/MyOrder.dart';
 import 'package:MCCAdmin/widgets/MyButtonW.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -118,7 +118,8 @@ class OrderingServiceDialog extends StatelessWidget {
                                         minLines: 4,
                                         maxLines: 6,
                                         decoration: InputDecoration(
-                                          fillColor: ColorsManager.lighterGray,
+                                          fillColor: Theme.of(context)
+                                              .scaffoldBackgroundColor,
                                           filled: true,
                                           hintText: S
                                               .of(context)
@@ -165,7 +166,8 @@ class OrderingServiceDialog extends StatelessWidget {
                                         // minLines: 3,
                                         maxLines: 3,
                                         decoration: InputDecoration(
-                                          fillColor: ColorsManager.lighterGray,
+                                          fillColor: Theme.of(context)
+                                              .scaffoldBackgroundColor,
                                           filled: true,
                                           // hintText: BlocProvider.of<AuthCubit>(
                                           //         context)
@@ -193,15 +195,19 @@ class OrderingServiceDialog extends StatelessWidget {
                                     Container(
                                       width: double.infinity,
                                       child: TextFormField(
+                                        keyboardType: TextInputType.number,
                                         initialValue:
                                             BlocProvider.of<AuthCubit>(context)
                                                 .user!
                                                 .phoneNumber!,
                                         validator: (value) {
+                                          if (double.tryParse(value!) == null) {
+                                            return 'Please enter a valid number';
+                                          }
                                           if (value!.isNotEmpty) {
                                             orderCubit.phoneNumber = value;
                                           } else if (value.isEmpty) {
-                                            orderCubit.address =
+                                            orderCubit.phoneNumber =
                                                 BlocProvider.of<AuthCubit>(
                                                         context)
                                                     .user!
@@ -211,7 +217,8 @@ class OrderingServiceDialog extends StatelessWidget {
                                         minLines: 1,
                                         maxLines: 1,
                                         decoration: InputDecoration(
-                                          fillColor: ColorsManager.lighterGray,
+                                          fillColor: Theme.of(context)
+                                              .scaffoldBackgroundColor,
                                           filled: true,
                                           // hintText: BlocProvider.of<AuthCubit>(
                                           //         context)
@@ -244,7 +251,8 @@ class OrderingServiceDialog extends StatelessWidget {
                                         .user!
                                         .userID!,
                                     service.id);
-                                print('tmaaaaam');
+                                MyorderRestart();
+                                // debugPrint('tmaaaaam');
                               }
                             },
                             textColor: Theme.of(context).hintColor,

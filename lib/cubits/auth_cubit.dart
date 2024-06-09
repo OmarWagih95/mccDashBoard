@@ -2,20 +2,24 @@ import 'dart:async';
 
 import 'package:MCCAdmin/model/userModel.dart';
 import 'package:MCCAdmin/services/FirebaseUserServices.dart';
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_state.dart';
 
 final CollectionReference usersCollection =
     FirebaseFirestore.instance.collection('users');
+userModel? user_;
+init() async {
+  user_ = await FirebaseUserServices().getUserData();
+  // debugPrint('${user.userID} fe alfunction tmaam');
+}
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-  userModel? user;
+  userModel? user = user_;
   String? userID;
   String? userName;
   String? email;
@@ -30,9 +34,9 @@ class AuthCubit extends Cubit<AuthState> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   changeIsSecured(bool x) {
-    print(x);
+    debugPrint('$x');
     isSecured = x;
-    print(isSecured);
+    debugPrint('$isSecured');
     emit(AuthIsSecuredState());
   }
 
@@ -72,7 +76,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (isVerified) {
         timer!.cancel();
         userID = await _auth.currentUser!.uid;
-        print('tmaaaam');
+        debugPrint('tmaaaam');
         try {
           //bd5l aldata flfirestore users collection
           await usersCollection.doc(userID).set({
@@ -80,21 +84,22 @@ class AuthCubit extends Cubit<AuthState> {
             'userName': userName,
             'phoneNumber': phoneNumber,
             'address': address
-          }).then((value) => print('success wldata tmaam wmsr btslm 3laik'));
-          //   print(email);
-          //   print(userName);
-          //   print(phoneNumber);
-          //   print(address);
+          }).then(
+              (value) => debugPrint('success wldata tmaam wmsr btslm 3laik'));
+          debugPrint(email);
+          debugPrint(userName);
+          debugPrint(phoneNumber);
+          debugPrint(address);
           // await FirebaseUserServices().userInfo( email!, userName!, phoneNumber!, address!);
         } catch (e) {
-          print(e);
+          debugPrint('$e');
         }
         emit(AuthCubitVerificationSuccess());
       } else {
-        print('lsa');
+        debugPrint('lsa');
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
     }
   }
 
@@ -110,8 +115,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<userModel?> getUserData() async {
-    userModel? user = await FirebaseUserServices().getUserData();
-    print('${user.userID} fe alfunction tmaam');
+    user = await FirebaseUserServices().getUserData();
+    // debugPrint('${user.userID} fe alfunction tmaam');
     return user;
   }
 }

@@ -25,14 +25,13 @@ abstract class ColorsManager {
 class FxColors {
   static Color background = Colors.white;
   static const Color secondary = ColorsManager.Color10Light;
-  static const Color primary = Color(0xFFFFca0A);
+  static const Color primary = Color.fromARGB(255, 251, 220, 108);
   static Color primarySecondary = ColorsManager.Color10Light.withOpacity(0.6);
   static Color textLightColor = Colors.black;
   static Color textDarkColor = Colors.white;
 
   /////////////////////
-  static Color background_Dark =
-      Color.fromARGB(255, 123, 123, 123).withOpacity(0.2);
+  static Color background_Dark = const Color.fromARGB(199, 0, 0, 0);
   static const Color secondary_Dark = Color.fromARGB(255, 105, 105, 105);
   static Color primary_Dark = Color.fromARGB(255, 88, 88, 88).withOpacity(0.2);
   static Color primarySecondary_Dark =

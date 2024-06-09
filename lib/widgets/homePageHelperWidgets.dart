@@ -1,32 +1,38 @@
 import 'dart:developer';
-
 import 'package:MCCAdmin/cash/shared_pref.dart';
 import 'package:MCCAdmin/constants/colors.dart';
 import 'package:MCCAdmin/cubits/LanguagesCupit.dart';
 import 'package:MCCAdmin/cubits/SearchCupit.dart';
-import 'package:MCCAdmin/cubits/SearchCupitStates.dart';
-import 'package:MCCAdmin/cubits/auth_cubit.dart';
 import 'package:MCCAdmin/cubits/auth_cubit.dart';
 import 'package:MCCAdmin/cubits/darkModeCubit.dart';
-import 'package:MCCAdmin/cubits/home_page_cubit.dart';
-import 'package:MCCAdmin/cubits/order_cubit.dart';
+import 'package:MCCAdmin/cubits/login_cubit.dart';
 import 'package:MCCAdmin/generated/l10n.dart';
 import 'package:MCCAdmin/helpers/constants.dart';
 import 'package:MCCAdmin/model/category.dart';
-import 'package:MCCAdmin/model/dummyData.dart';
-import 'package:MCCAdmin/model/userModel.dart';
+import 'package:MCCAdmin/routing/app_router.dart';
 import 'package:MCCAdmin/routing/routes.dart';
-import 'package:MCCAdmin/views/navpages/HomePage.dart';
 import 'package:MCCAdmin/views/navpages/main_page.dart';
-import 'package:MCCAdmin/widgets/category_item.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../views/MyOrdersScreen.dart';
-import '../views/loginScreen.dart';
-import '/cubits/visibilityCubit.dart';
+
+void cashlanguage(String lan) async {
+  // to do
+  language = lan;
+  await CashHelper.setData(
+    key: 'language',
+    value: language,
+  );
+}
+
+void cashbrightness(String mod) async {
+  // to do
+  brightness = mod;
+  await CashHelper.setData(
+    key: 'brightness',
+    value: brightness,
+  );
+}
 
 class searchbar extends StatelessWidget {
   final List<Categoryy> DUMMY_CATEGORIES;
@@ -42,17 +48,12 @@ class searchbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 8.h),
       child: TextField(
         style: Theme.of(context).textTheme.displaySmall,
         onChanged: (query) => BlocProvider.of<SearchCubit>(context)
             .filterList(query, DUMMY_CATEGORIES),
         textDirection: TextDirection.rtl,
-
-        // decoration: InputDecoration(
-        //   hintStyle: TextStyle(color: Theme.of(context).hintColor,fontSize: 14.w),
-        //   enabled: true
-        // ,enabledBorder: OutlineInputBorder(
         decoration: InputDecoration(
           hintStyle: Theme.of(context).textTheme.bodyLarge,
           enabled: true,
@@ -60,7 +61,7 @@ class searchbar extends StatelessWidget {
           focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
           border: OutlineInputBorder(
               borderSide: BorderSide(color: Theme.of(context).primaryColor)),
-          suffixIcon: IconButton(
+          suffixIcon: const IconButton(
               onPressed: null,
               icon: Icon(
                 Icons.search,
@@ -68,81 +69,6 @@ class searchbar extends StatelessWidget {
           hintText: S.of(context).Search_for_service_or_product,
         ),
         controller: search_controller,
-      ),
-    );
-  }
-}
-
-// class leftappbar extends StatefulWidget {
-//   leftappbar({super.key});
-
-//   @override
-//   State<leftappbar> createState() => _leftappbarState();
-// }
-
-// class _leftappbarState extends State<leftappbar> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-//         IconButton(
-//             onPressed: () {
-//               Scaffold.of(context).openDrawer();
-//             },
-//             icon: const Icon(
-//               Icons.menu,
-//               // color: ColorsManager.Color10Light,
-//             )),
-//         IconButton(
-//             onPressed: () {
-//               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//                   content: Text(
-//                 S.of(context).No_notifications_now,
-//                 style: TextStyle(fontSize: 32),
-//               )));
-//             },
-//             icon: Icon(
-//               Icons.notifications,
-//               color: Theme.of(context).iconTheme.color,
-//               // color: ColorsManager.Color10Light
-//             )),
-//       ]),
-//     );
-//   }
-// }
-
-class messageText extends StatelessWidget {
-  bool isVisible;
-
-  messageText({super.key, required this.isVisible});
-
-  @override
-  Widget build(BuildContext context) {
-    return Visibility(
-      visible: isVisible,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        margin: const EdgeInsets.symmetric(horizontal: 8),
-        decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 223, 223, 237),
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
-                topRight: Radius.circular(24))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              S.of(context).Text_us_for_any_help_or_question,
-              style: const TextStyle(),
-            ),
-            IconButton(
-                onPressed: () {
-                  BlocProvider.of<VisibilityCubit>(context).toggleVisibility();
-                },
-                icon: const Icon(Icons.cancel))
-          ],
-        ),
       ),
     );
   }
@@ -171,138 +97,134 @@ class _CustomDrawerState extends State<CustomDrawer> {
       },
       builder: (context, state) {
         return Drawer(
-          child: Container(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  padding: EdgeInsets.zero,
-                  decoration: BoxDecoration(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(50.w, 50.h),
+                          bottomLeft: Radius.elliptical(50.w, 50.h)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.circular(150)
+                            ),
                         padding: EdgeInsets.zero,
                         child: Image.asset(
-                          'img/mmcassits/logo_12.png',
-                          fit: BoxFit.cover,
+                          width: 130.w,
+                          height: 130.h,
+                          'img/mmcassits/logo.png',
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.home,
-                  ),
-                  title: Text(S.of(context).Home, style: TextStyle()),
-                  onTap: () {
-                    if (ModalRoute.of(context)!.settings.name ==
-                        Routes.mainPage) {
-                      Navigator.pop(context);
-                    } else {
-                      Navigator.of(context)
-                          .pushReplacementNamed(Routes.mainPage);
-                    }
-                  },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.home,
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.settings,
-                  ),
-                  title: Text(S.of(context).Settings, style: TextStyle()),
-                  onTap: () {
-                    Currindx = 2;
+                title: Text(S.of(context).Home, style: TextStyle()),
+                onTap: () {
+                  if (curRoute == Routes.mainPage && Currindx != 0) {
+                    Currindx = 0;
                     changeremoteindex();
-                  },
+                    Navigator.pop(context);
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.settings,
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.add_home_work,
-                  ),
-                  title: Text(S.of(context).My_Order, style: TextStyle()),
-                  onTap: () {
-                    Currindx = 1;
-                    changeremoteindex();
-                    // print(
-                    //     '${BlocProvider.of<AuthCubit>(context).user!.userID!} hna zorar');
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => BlocProvider(
-                    //               create: (context) => OrderCubit()
-                    //                 ..GetMyOrders(
-                    //                     BlocProvider.of<AuthCubit>(context)
-                    //                         .user!
-                    //                         .userID!),
-                    //               child: MyOrdersScreen(),
-                    //             )));
-                  },
+                title: Text(S.of(context).Settings, style: TextStyle()),
+                onTap: () {
+                  Currindx = 2;
+                  changeremoteindex();
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.add_home_work,
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.logout,
-                  ),
-                  title: Text(S.of(context).Sign_out, style: TextStyle()),
-                  onTap: () async {
-                    authCubit.signOut();
-                    await CashHelper.setData(
-                      key: 'Islogin',
-                      value: false,
-                    );
-                  },
+                title: Text(S.of(context).My_Order, style: TextStyle()),
+                onTap: () {
+                  Currindx = 1;
+                  changeremoteindex();
+                  // debugPrint(
+                  //     '${BlocProvider.of<AuthCubit>(context).user!.userID!} hna zorar');
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => BlocProvider(
+                  //               create: (context) => OrderCubit()
+                  //                 ..GetMyOrders(
+                  //                     BlocProvider.of<AuthCubit>(context)
+                  //                         .user!
+                  //                         .userID!),
+                  //               child: MyOrdersScreen(),
+                  //             )));
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.logout,
                 ),
-                // ListTile(
-                //
-                //   leading: Switch(value: false, onChanged: (value){
-                //     print('changed');
-                //   }),
-                //   title:
-                //       Text(S.of(context).Brightness_change, style: TextStyle()),
-                //   onTap: () async {
-                //     final mode =
-                //         BlocProvider.of<Dark_lightModeCubit>(context).mode;
-                //     log(' from onPressed1 mode is $mode');
-                //     BlocProvider.of<Dark_lightModeCubit>(context)
-                //         .darkAndlightMode(mode == 'light' ? 'dark' : 'light');
-                //   },
-                // ),
-                ListTile(
-                  leading: const Icon(Icons.change_circle),
-                  title:
-                      Text(S.of(context).Language_Exchange, style: TextStyle()),
-                  onTap: () async {
-                    BlocProvider.of<LanguagesCubit>(context).changeLanguages(
-                        ((Localizations.localeOf(context).languageCode) == 'en')
-                            ? 'ar'
-                            : 'en');
-                  },
-                ),
-                BlocBuilder<HomePageCubit, HomePageState>(
-                  builder: (context, state) {
-                    return SwitchListTile(
-                      value: BlocProvider.of<HomePageCubit>(context).darkMode,
-                      onChanged: (value) {
-                        BlocProvider.of<HomePageCubit>(context)
-                            .changeSwitch(value);
-                        final mode =
-                            BlocProvider.of<Dark_lightModeCubit>(context).mode;
-                        log(' from onPressed1 mode is $mode');
-                        BlocProvider.of<Dark_lightModeCubit>(context)
-                            .darkAndlightMode(
-                                mode == 'light' ? 'dark' : 'light');
-                      },
-                      title: Text(S.of(context).Brightness_change,
-                          style: TextStyle()),
-                      activeColor: Theme.of(context).primaryColor,
-                      hoverColor: Theme.of(context).primaryColor,
-                      inactiveThumbColor: Colors.black,
-                      inactiveTrackColor: Colors.black12,
-                    );
-                  },
-                ),
-              ],
-            ),
+                title: Text(S.of(context).Sign_out, style: TextStyle()),
+                onTap: () async {
+                  authCubit.signOut();
+                  await CashHelper.setData(
+                    key: 'Islogin',
+                    value: false,
+                  );
+                  BlocProvider.of<LoginCubit>(context).emitInitialloginstate();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.change_circle),
+                title:
+                    Text(S.of(context).Language_Exchange, style: TextStyle()),
+                onTap: () async {
+                  String lan_ =
+                      ((Localizations.localeOf(context).languageCode) == 'en')
+                          ? 'ar'
+                          : 'en';
+                  BlocProvider.of<LanguagesCubit>(context)
+                      .changeLanguages(lan_);
+                  cashlanguage(lan_);
+                },
+              ),
+              SwitchListTile(
+                value: BlocProvider.of<Dark_lightModeCubit>(context).mode ==
+                        'light'
+                    ? true
+                    : false,
+                onChanged: (value) {
+                  BlocProvider.of<Dark_lightModeCubit>(context)
+                      .darkAndlightMode(value == false ? 'dark' : 'light');
+                  cashbrightness(
+                      BlocProvider.of<Dark_lightModeCubit>(context).mode);
+                  // CashHelper.setData(
+                  //     key: 'brigtness',
+                  //     value:
+                  //         (BlocProvider.of<Dark_lightModeCubit>(context).mode));
+                },
+                title:
+                    Text(S.of(context).Brightness_change, style: TextStyle()),
+                activeColor: Colors.black12,
+                hoverColor: Theme.of(context).scaffoldBackgroundColor,
+                inactiveThumbColor: Colors.white,
+                inactiveTrackColor: FxColors.primary,
+              )
+            ],
           ),
         );
       },

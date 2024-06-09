@@ -1,21 +1,16 @@
 import 'package:MCCAdmin/constants/colors.dart';
-import 'package:MCCAdmin/cubits/auth_cubit.dart';
 import 'package:MCCAdmin/cubits/order_cubit.dart';
 import 'package:MCCAdmin/cubits/services_cubit.dart';
+import 'package:MCCAdmin/generated/l10n.dart';
 import 'package:MCCAdmin/model/category.dart';
-import 'package:MCCAdmin/model/service.dart';
-import 'package:MCCAdmin/views/Service_detail_screen.dart';
 import 'package:MCCAdmin/views/serviceDetailsScreen.dart';
-import 'package:MCCAdmin/widgets/addingNewSerrviceDialog.dart';
+import 'package:MCCAdmin/widgets/customAppbar.dart';
 import 'package:MCCAdmin/widgets/homePageHelperWidgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-import '../cubits/login_cubit.dart';
-import '../widgets/MyButtonW.dart';
 import '../widgets/leftappbarUpdate.dart';
 
 class ServicesScreen extends StatefulWidget {
@@ -38,7 +33,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    // print('why ${BlocProvider.of<AuthCubit>(context).user!.phoneNumber}');
+    // debugPrint('why ${BlocProvider.of<AuthCubit>(context).user!.phoneNumber}');
 
     ServicesCubit servicesCubit = context.read<ServicesCubit>();
     return Scaffold(
@@ -47,34 +42,37 @@ class _ServicesScreenState extends State<ServicesScreen> {
         child: Column(
           children: [
             Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black54,
-                      blurRadius: 3,
-                      blurStyle: BlurStyle.outer,
-                    )
-                  ]),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                child: LeftAppBarUpdate(),
+              child: customAppbar(
+                title: S.of(context).service_request,
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 30.h),
               child: Column(
                 children: [
-                  Text(
-                    (Localizations.localeOf(context).languageCode == 'ar')
-                        ? widget.categoryy.AR['categoryName']
-                        : widget.categoryy.EN['categoryName'],
-                    maxLines: 2,
-                    style: TextStyle(
+                  Container(
+                    padding: EdgeInsets.all(8.r),
+                    decoration: BoxDecoration(
+                        border: BorderDirectional(
+                          top: BorderSide(color: FxColors.primary, width: 5.w),
+                          bottom:
+                              BorderSide(color: FxColors.primary, width: 1.w),
+                          start:
+                              BorderSide(color: FxColors.primary, width: 1.w),
+                          end: BorderSide(color: FxColors.primary, width: 1.w),
+                        ),
+                        color: Theme.of(context).primaryColorLight,
+                        borderRadius: BorderRadius.circular(10.h)),
+                    child: Text(
+                      (Localizations.localeOf(context).languageCode == 'ar')
+                          ? widget.categoryy.AR['categoryName']
+                          : widget.categoryy.EN['categoryName'],
+                      maxLines: 2,
+                      style: TextStyle(
                         fontSize: 25.w,
                         fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 30.h,
@@ -85,132 +83,106 @@ class _ServicesScreenState extends State<ServicesScreen> {
                     },
                     builder: (context, state) {
                       return state is ServicesPageSuccess
-                          ? Column(
-                              children: [
-                                Container(
-                                  height: 500.h,
-                                  child: ListView.builder(
-                                      itemCount:
-                                          servicesCubit.servicesDataList.length,
-                                      itemBuilder: (context, index) => Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  print('clicked');
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              BlocProvider(
-                                                                create: (context) =>
-                                                                    OrderCubit(),
-                                                                child: ServiceDetailsScreen(
-                                                                    state.servicesDataList[
-                                                                        index]
-                                                                    //     Service(context.read<ServicesCubit>().servicesDataList[index].id,
-                                                                    //   context.read<ServicesCubit>().servicesDataList[index].AR,
-                                                                    //   context.read<ServicesCubit>().servicesDataList[index].EN,
-                                                                    //   context.read<ServicesCubit>().servicesDataList[index].logoImgURL,
-                                                                    // )
-                                                                    ),
-                                                              )));
-                                                },
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .primaryColor),
-                                                      color: Theme.of(context)
-                                                          .primaryColorLight,
-                                                      // boxShadow: [
-                                                      //   // BoxShadow(
-                                                      //   //   color: Colors.grey.shade400,
-                                                      //   //   spreadRadius: 1,
-                                                      //   //   blurRadius: 15,
-                                                      //   //   blurStyle: BlurStyle.outer,
-                                                      //   //   // offset:Offset(0, -5)
-                                                      //   // )
-                                                      // ]
-                                                      // color: ColorsManager.,
-                                                      // gradient: LinearGradient(begin: Alignment.topCenter,end: Alignment.bottomLeft,colors: [Colors.black12,Colors.purple.shade200]),
-                                                      // ,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.h)),
-                                                  width: double.infinity,
-                                                  height: 70.h,
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 15),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          (Localizations.localeOf(
-                                                                          context)
-                                                                      .languageCode ==
-                                                                  'ar')
-                                                              ? context
-                                                                      .read<
-                                                                          ServicesCubit>()
-                                                                      .servicesDataList[
-                                                                          index]
-                                                                      .AR[
-                                                                  'serviceName']
-                                                              : context
-                                                                  .read<
-                                                                      ServicesCubit>()
-                                                                  .servicesDataList[
-                                                                      index]
-                                                                  .EN['serviceName'],
-                                                          style: TextStyle(
-                                                            fontSize: 20.w,
-                                                          ),
-                                                        ),
-                                                        Icon(
-                                                          (Localizations.localeOf(
-                                                                          context)
-                                                                      .languageCode ==
-                                                                  'en')
-                                                              ? Icons
-                                                                  .arrow_circle_left
-                                                              : Icons
-                                                                  .arrow_circle_right,
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .hoverColor,
-                                                          size: 40.h,
-                                                        ),
-                                                      ],
-                                                    ),
+                          ? Container(
+                              height: 500.h,
+                              child: ListView.builder(
+                                  itemCount:
+                                      servicesCubit.servicesDataList.length,
+                                  itemBuilder: (context, index) =>
+                                      GestureDetector(
+                                        onTap: () {
+                                          debugPrint('clicked');
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BlocProvider(
+                                                create: (context) =>
+                                                    OrderCubit(),
+                                                child: ServiceDetailsScreen(
+                                                    state.servicesDataList[
+                                                        index]),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 10.h),
+                                          decoration: BoxDecoration(
+                                              border: BorderDirectional(
+                                                bottom: BorderSide(
+                                                    color: FxColors.primary,
+                                                    width: 5.w),
+                                                top: BorderSide(
+                                                    color: FxColors.primary,
+                                                    width: 1.w),
+                                                start: BorderSide(
+                                                    color: FxColors.primary,
+                                                    width: 1.w),
+                                                end: BorderSide(
+                                                    color: FxColors.primary,
+                                                    width: 1.w),
+                                              ),
+                                              color: Theme.of(context)
+                                                  .primaryColorLight,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.h)),
+                                          width: double.infinity,
+                                          height: 70.h,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 15.w),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    (Localizations.localeOf(
+                                                                    context)
+                                                                .languageCode ==
+                                                            'ar')
+                                                        ? context
+                                                            .read<
+                                                                ServicesCubit>()
+                                                            .servicesDataList[
+                                                                index]
+                                                            .AR['serviceName']
+                                                        : context
+                                                            .read<
+                                                                ServicesCubit>()
+                                                            .servicesDataList[
+                                                                index]
+                                                            .EN['serviceName'],
+                                                    maxLines: 2,
+                                                    style: TextStyle(
+                                                        fontSize: 20.w,
+                                                        overflow: TextOverflow
+                                                            .ellipsis),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 15.h,
-                                              )
-                                            ],
-                                          )),
-                                ),
-                                MyButton(
-                                    text: 'Add New Service',
-                                    onClick: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) =>
-                                              AddingNewServiceDialog(
-                                                  widget.categoryy));
-                                    },
-                                    textColor: Theme.of(context).hintColor,
-                                    buttonColor: Theme.of(context).primaryColor)
-                              ],
+                                                Icon(
+                                                  (Localizations.localeOf(
+                                                                  context)
+                                                              .languageCode ==
+                                                          'en')
+                                                      ? Icons.arrow_circle_left
+                                                      : Icons
+                                                          .arrow_circle_right,
+                                                  color: Theme.of(context)
+                                                      .hoverColor,
+                                                  size: 40.r,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )),
                             )
                           : SpinKitCircle(
-                              color: Colors.black45,
+                              color: Theme.of(context).iconTheme.color,
                             );
                     },
                   )

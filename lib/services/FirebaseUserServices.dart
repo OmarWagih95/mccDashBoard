@@ -2,6 +2,7 @@ import 'package:MCCAdmin/model/userModel.dart';
 import 'package:MCCAdmin/views/verificationScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class FirebaseUserServices {
   String? userID;
@@ -20,13 +21,13 @@ class FirebaseUserServices {
         .createUserWithEmailAndPassword(email: email!, password: password!)
         .then((value) {
       if (value != null) {
-        print('$value hna flmodel');
+        debugPrint('$value hna flmodel');
         if (value.user! != null) {
-          print('mwgoood ya 3m');
+          debugPrint('mwgoood ya 3m');
         } else {
-          print('msh mwgoooud');
+          debugPrint('msh mwgoooud');
         }
-        print(value.user!.uid);
+        debugPrint(value.user!.uid);
         userID = value.user!.uid;
         // userController.userID=userID;
       }
@@ -34,9 +35,9 @@ class FirebaseUserServices {
 
     // }
     // catch(e){
-    //   print(e);
+    //   debugPrint(e);
     // }
-    // print('done');
+    // debugPrint('done');
     return true;
   }
 
@@ -44,10 +45,10 @@ class FirebaseUserServices {
     await FirebaseAuth.instance.currentUser!.reload();
 
     var user = await _auth.currentUser;
-    print(user);
+    debugPrint('$user');
     var isVerified = user!.emailVerified;
 
-    print(isVerified);
+    debugPrint('$isVerified');
     if (isVerified) {
       return true;
     } else {
@@ -66,21 +67,21 @@ class FirebaseUserServices {
   }
 
   // Future userInfo (String email,String userName,String phoneNumber, String address )async{
-  //    print('asht8lttttttt');
-  //    print(email);print(userName);print(phoneNumber);print(address);
-  //    print(userID);
-  //    print('here');
+  //    debugPrint('asht8lttttttt');
+  //    debugPrint(email);debugPrint(userName);debugPrint(phoneNumber);debugPrint(address);
+  //    debugPrint(userID);
+  //    debugPrint('here');
   //    await usersCollection.doc('1').set({
   //      'email': email!,
   //      'userName': userName!,
   //      'phoneNumber': phoneNumber!,
   //      'address': address!
-  //    }).then((value) => print('success'));
+  //    }).then((value) => debugPrint('success'));
   //  }
   Future login(String email, String password) async {
     await _auth.signInWithEmailAndPassword(email: email, password: password);
     var test = await _auth.currentUser!.uid;
-    print('user ${test}');
+    debugPrint('user ${test}');
   }
 
   Future signOut() async {
@@ -91,13 +92,13 @@ class FirebaseUserServices {
     // await _auth.userChanges();
     // await _auth.currentUser!.reload();
     String? userID = await _auth.currentUser!.uid;
-    print('${userID} currentUser');
+    debugPrint('${userID} currentUser');
     var userData =
         await FirebaseFirestore.instance.collection('users').doc(userID).get();
-    print('${userID} get user ahu');
+    debugPrint('${userID} get user ahu');
     userModel user = await userModel(userID, userData['email'],
         userData['userName'], userData['phoneNumber'], userData['address']);
-    print('test ${user.userName}');
+    debugPrint('test ${user.userName}');
     return user;
   }
 }

@@ -10,18 +10,24 @@ class DarkModeState extends Dark_lightModeState {}
 
 class LightModeState extends Dark_lightModeState {}
 
+class changingSwitchState extends Dark_lightModeState {}
+
 class Dark_lightModeCubit extends Cubit<Dark_lightModeState> {
   Dark_lightModeCubit() : super(initialtModeState());
   String mode = '';
   void darkAndlightMode(String onpressMode) {
     if (onpressMode == 'light') {
-      log('light from cubit');
       mode = 'light';
       emit(LightModeState());
     } else {
-      log('dark from cubit');
       mode = 'dark';
       emit(DarkModeState());
     }
   }
+
+  // bool darkMode = (mode == '') ? false : true;
+  // changeSwitch(bool x) {
+  //   darkMode = x;
+  //   emit(changingSwitchState());
+  // }
 }

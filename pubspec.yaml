@@ -61,6 +61,12 @@ dependencies:
   image_picker: ^1.0.8
   video_player: ^2.8.6
   flick_video_player: ^0.8.0
+  cached_network_image: ^3.3.1
+  flutter_cache_manager: ^3.3.2
+  upgrader: ^10.3.0
+  carousel_slider: ^4.2.1
+  package_info_plus: ^8.0.0
+
 
 
 dev_dependencies:

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:MCCAdmin/cash/shared_pref.dart';
 import 'package:MCCAdmin/constants/colors.dart';
 import 'package:MCCAdmin/cubits/LanguagesCupit.dart';
 import 'package:MCCAdmin/cubits/darkModeCubit.dart';
@@ -10,12 +11,32 @@ import 'package:MCCAdmin/routing/routes.dart';
 import 'package:MCCAdmin/views/navpages/main_page.dart';
 import 'package:MCCAdmin/views/selectLanguage.dart';
 import 'package:MCCAdmin/widgets/SettingsListItem.dart';
+import 'package:MCCAdmin/widgets/customAppbar.dart';
+import 'package:MCCAdmin/widgets/homePageHelperWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+void cashlanguage(String lan) async {
+  // to do
+  language = lan;
+  await CashHelper.setData(
+    key: 'language',
+    value: language,
+  );
+}
+
+void cashbrightness(String mod) async {
+  // to do
+  brightness = mod;
+  await CashHelper.setData(
+    key: 'brightness',
+    value: brightness,
+  );
+}
 
 enum SocialMedia { snapShat, instgram, whatsapp, email }
 
@@ -53,123 +74,127 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: EdgeInsets.all(15.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 30),
-              child: Align(
-                alignment: AlignmentDirectional.topStart,
-                child: Text(
-                  S.of(context).Settings,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium!
-                      .copyWith(overflow: TextOverflow.visible),
-                ),
-              ),
-            ),
-            SettingsListItem(Icons.autorenew, S.of(context).Language_Exchange,
-                () {
-              BlocProvider.of<LanguagesCubit>(context).changeLanguages(
-                  ((Localizations.localeOf(context).languageCode) == 'en')
-                      ? 'ar'
-                      : 'en');
-            }),
-            SettingsListItem(Icons.share, S.of(context).Share_Application,
-                () async {
-              Share.share('check out our website soon at https://example.com',
-                  subject: 'welcome to MCCAdmin ');
-            }),
-            SettingsListItem(Icons.info, S.of(context).Who_Are, () {}),
-            SettingsListItem(Icons.person, S.of(context).Sign_IN, () {
-              // here condition if login or not
-              (Islogin == true)
-                  ? {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(S.of(context).You_are_already_logged_in),
-                      ))
-                    }
-                  : Navigator.of(context).pushNamed(Routes.LoginScreen);
-            }),
-            SettingsListItem(Icons.light_mode, S.of(context).Brightness_change,
-                () {
-              final mode = BlocProvider.of<Dark_lightModeCubit>(context).mode;
-              log(' from onPressed1 mode is $mode');
-              BlocProvider.of<Dark_lightModeCubit>(context)
-                  .darkAndlightMode(mode == 'light' ? 'dark' : 'light');
-            }),
-            SizedBox(
-              height: 30.h,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        drawer: CustomDrawer(),
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      S.of(context).Text_Us,
-                      style: TextStyle(fontSize: 18.w),
-                    )
-                  ],
-                ),
-                // SettingsListItem(
-                //   null,
-                //   S.of(context).Text_Us,
-                //   () {},
-                //   links: true,
-                // ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  // decoration: BoxDecoration(
-                  //     border:
-                  //         Border(bottom: BorderSide(color: Colors.black54))),
-                  child: Card(
-                    elevation: .5,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        buildsocialButton(
-                          // color: Colors.yellowAccent.shade400,
-                          onclick: () async {
-                            setState(() async {
-                              _launched = share(SocialMedia.snapShat);
-                            });
-                          },
-                          icon: FontAwesomeIcons.snapchat,
-                        ),
-                        buildsocialButton(
-                          color: Colors.white,
-                          onclick: () => share(SocialMedia.instgram),
-                          icon: FontAwesomeIcons.instagram,
-                        ),
-                        buildsocialButton(
-                          color: Colors.green,
-                          onclick: () => share(SocialMedia.whatsapp),
-                          icon: FontAwesomeIcons.whatsapp,
-                        ),
-                        buildsocialButton(
-                          color: Colors.blueGrey,
-                          onclick: () => share(SocialMedia.email),
-                          icon: Icons.email,
-                        )
-                      ],
-                    ),
+                SafeArea(
+                    child: customAppbar(
+                  arrow: false,
+                  title: S.of(context).Settings,
+                )),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
+                  child: Column(
+                    children: [
+                      SettingsListItem(
+                          Icons.autorenew, S.of(context).Language_Exchange, () {
+                        String lan_ =
+                            ((Localizations.localeOf(context).languageCode) ==
+                                    'en')
+                                ? 'ar'
+                                : 'en';
+                        BlocProvider.of<LanguagesCubit>(context)
+                            .changeLanguages(lan_);
+                        cashlanguage(lan_);
+                      }),
+                      SettingsListItem(
+                          Icons.share, S.of(context).Share_Application,
+                          () async {
+                        Share.share(
+                            'check out our instagram at https://www.instagram.com/memar_corner_MCCAdmin?igsh=bGp2Z3g0YWk0NWRv&utm_source=qr',
+                            subject: 'welcome to MCCAdmin ');
+                      }),
+                      SettingsListItem(Icons.person, S.of(context).Sign_IN, () {
+                        // here condition if login or not
+                        (Islogin == true)
+                            ? {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                      S.of(context).You_are_already_logged_in),
+                                ))
+                              }
+                            : Navigator.of(context)
+                                .pushNamed(Routes.LoginScreen);
+                      }),
+                      SettingsListItem(
+                          Icons.light_mode, S.of(context).Brightness_change,
+                          () {
+                        final mode =
+                            BlocProvider.of<Dark_lightModeCubit>(context).mode;
+                        log(' from onPressed1 mode is $mode');
+                        BlocProvider.of<Dark_lightModeCubit>(context)
+                            .darkAndlightMode(
+                                mode == 'light' ? 'dark' : 'light');
+
+                        cashbrightness(
+                            BlocProvider.of<Dark_lightModeCubit>(context).mode);
+                      }),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                S.of(context).Text_Us,
+                                style: TextStyle(fontSize: 18.w),
+                              )
+                            ],
+                          ),
+                          // SettingsListItem(
+                          //   null,
+                          //   S.of(context).Text_Us,
+                          //   () {},
+                          //   links: true,
+                          // ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Card(
+                            elevation: .5.w,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                buildsocialButton(
+                                  // color: Colors.yellowAccent.shade400,
+                                  onclick: () async {
+                                    setState(() async {
+                                      _launched = share(SocialMedia.snapShat);
+                                    });
+                                  },
+                                  icon: FontAwesomeIcons.snapchat,
+                                ),
+                                buildsocialButton(
+                                  color: Colors.white,
+                                  onclick: () => share(SocialMedia.instgram),
+                                  icon: FontAwesomeIcons.instagram,
+                                ),
+                                buildsocialButton(
+                                  color: Colors.green,
+                                  onclick: () => share(SocialMedia.whatsapp),
+                                  icon: FontAwesomeIcons.whatsapp,
+                                ),
+                                buildsocialButton(
+                                  color: Colors.blueGrey,
+                                  onclick: () => share(SocialMedia.email),
+                                  icon: Icons.email,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
-      )),
-    );
+              ]),
+        ));
   }
 }
 
@@ -206,8 +231,8 @@ Widget buildsocialButton(
                           Colors.white.withOpacity(.5),
                           Colors.white,
                         ])),
-      width: 48,
-      height: 48,
+      width: 48.w,
+      height: 48.h,
       child: Center(
         child: FaIcon(
           icon,

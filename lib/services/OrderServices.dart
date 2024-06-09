@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:MCCAdmin/model/order.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import './../model/service.dart';
 import './../model/order.dart';
 
@@ -31,11 +32,11 @@ class OrderServices {
         .where('userID', isEqualTo: userID)
         .where('active', isEqualTo: true)
         .get();
-
     OrdersQueryDocsList.addAll(querySnapshot.docs);
+
     for (int i = 0; i < OrdersQueryDocsList.length; i++) {
       service = await getServiceDataByID(OrdersQueryDocsList[i]['serviceID']);
-      print(service.AR['serviceName']);
+      debugPrint('${service.AR['serviceName']}');
       OrderDetails order = OrderDetails(
           OrdersQueryDocsList[i]['active'],
           OrdersQueryDocsList[i]['address'],
@@ -45,21 +46,15 @@ class OrderServices {
           OrdersQueryDocsList[i]['serviceID'],
           service);
       ordersData.add(order);
-      print(ordersData.length);
+      debugPrint('$ordersData.length');
       try {
-        print(ordersData[i]);
-        print(ordersData[i].active);
+        debugPrint('${ordersData[i]}');
+        debugPrint('${ordersData[i].active}');
       } catch (e) {
-        print(e);
+        debugPrint('$e');
       }
     }
-    //  OrdersQueryDocsList.forEach((element) async{
-    //   service =await getServiceDataByID(element['serviceID']);
-    //   print(service.AR['serviceName']);
-    //   ordersData.add({element,service});
-    //   print(ordersData.length);
-    // });
-    print('${ordersData.length} abl alreturn');
+    debugPrint('${ordersData.length} abl alreturn');
     return ordersData;
   }
 
@@ -67,15 +62,27 @@ class OrderServices {
     List<QueryDocumentSnapshot> OrdersQueryDocsList = [];
     List ordersData = [];
     Service service;
+    OrderDetails order;
     QuerySnapshot querySnapshot = await ordersCollection
         .where('userID', isEqualTo: userID)
         .where('active', isEqualTo: false)
         .get();
     OrdersQueryDocsList.addAll(querySnapshot.docs);
+
     OrdersQueryDocsList.forEach((element) async {
       service = await getServiceDataByID(element['serviceID']);
-      ordersData.add({element, service});
+
+      order = OrderDetails(
+          element['active'],
+          element['address'],
+          element['description'],
+          element['phoneNumber'],
+          element['userID'],
+          element['serviceID'],
+          service);
+      ordersData.add(order);
     });
+
     return ordersData;
   }
 

@@ -1,55 +1,62 @@
+import 'package:MCCAdmin/constants/colors.dart';
 import 'package:MCCAdmin/generated/l10n.dart';
 import 'package:MCCAdmin/widgets/homePageHelperWidgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class customAppbar extends StatelessWidget {
   final String title;
+  final bool arrow;
   customAppbar({
     super.key,
     required this.title,
+    this.arrow = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Theme.of(context).iconTheme.color!,
-          blurRadius: 3,
-          blurStyle: BlurStyle.outer,
-        )
-      ]),
+      decoration: BoxDecoration(
+        border: BorderDirectional(
+          bottom: BorderSide(color: FxColors.primary, width: 1.w),
+          top: BorderSide(color: FxColors.primary, width: 1.w),
+        ),
+        color: Theme.of(context).primaryColor,
+      ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
         child: Row(
           children: [
-            IconButton(
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                icon: const Icon(
-                  Icons.menu,
-                  // color: ColorsManager.Color10Light,
-                )),
-            Spacer(),
-            Text(
-              title,
-              style: TextStyle(fontSize: 24),
+            !arrow
+                ? IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    icon: const Icon(
+                      Icons.menu,
+                      // color: ColorsManager.Color10Light,
+                    ))
+                : IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                    )),
+            // Spacer(),
+            // Spacer(),
+            Expanded(
+              child: Text(
+                title,
+                maxLines: 2,
+                style:
+                    TextStyle(fontSize: 24.sp, overflow: TextOverflow.ellipsis),
+              ),
             ),
-            Spacer(),
-            IconButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(
-                    S.of(context).No_notifications_now,
-                    style: TextStyle(fontSize: 32),
-                  )));
-                },
-                icon: Icon(
-                  Icons.notifications,
-                  color: Theme.of(context).iconTheme.color,
-                  // color: ColorsManager.Color10Light
-                )),
+            // Spacer(),
+            // Spacer(),
+            // Spacer(),
           ],
         ),
       ),

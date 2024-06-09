@@ -1,9 +1,7 @@
-import 'package:MCCAdmin/model/userModel.dart';
 import 'package:MCCAdmin/services/FirebaseUserServices.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 
 part 'login_state.dart';
 
@@ -19,22 +17,26 @@ class LoginCubit extends Cubit<LoginState> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   changeIsSecured(bool x) {
-    print(x);
+    debugPrint('$x');
     isSecured = x;
-    print(isSecured);
+    debugPrint('$isSecured');
     emit(LoginIsSecuredState());
   }
 
   login() async {
-    print('fun sh8ala');
+    debugPrint('fun sh8ala');
     emit(LoginLoadingState());
     try {
-      print(email);
-      print(passWord);
+      debugPrint(email);
+      debugPrint(passWord);
       await FirebaseUserServices().login(email!, passWord!);
       emit(LoginSuccessState());
     } catch (e) {
       emit(LoginFailureState(e.toString()));
     }
+  }
+
+  void emitInitialloginstate() {
+    emit(LoginInitial());
   }
 }

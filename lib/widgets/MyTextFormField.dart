@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyTextFormfield extends StatelessWidget {
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
   final Widget? suffexicon;
   final Widget? prifixicon;
   final bool isSecured;
@@ -18,33 +19,29 @@ class MyTextFormfield extends StatelessWidget {
     required this.hintText,
     this.suffexicon,
     this.prifixicon,
+    this.keyboardType,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validation,
+      keyboardType: keyboardType,
       controller: controller,
       decoration: InputDecoration(
-          filled: true,
-          fillColor: ColorsManager.lighterGray,
-          suffixIcon: suffexicon,
-          prefix: prifixicon,
-          // prefixIconColor: Colors.amberAccent,
-          // prefixIconConstraints:BoxConstraints() ,
-          // prefixStyle: Textstyles.font12grayregular,
-          hintText: hintText,
-          hintStyle: Textstyles.font14darkgraymedium,
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.h, vertical: 18.h),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide:
-                  BorderSide(color: ColorsManager.lightGray, width: 1.3)),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide:
-                  BorderSide(color: ColorsManager.mainBlue, width: 1.3))),
+        filled: true,
+        fillColor: ColorsManager.lighterGray,
+        suffixIcon: suffexicon,
+        prefix: prifixicon,
+        hintText: hintText,
+        hintStyle: Theme.of(context)
+            .textTheme
+            .headlineMedium!
+            .copyWith(color: Colors.black54),
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 18.h),
+        enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
+        focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
+      ),
       style: Textstyles.font14darkbluemedium,
       obscureText: isSecured,
     );

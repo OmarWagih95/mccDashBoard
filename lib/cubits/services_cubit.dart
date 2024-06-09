@@ -10,6 +10,9 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
+import '../model/network/servicesNetwork.dart';
+import '../model/service.dart';
+
 // import '../model/service.dart';
 
 part 'services_state.dart';
