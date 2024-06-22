@@ -4,16 +4,13 @@ import 'package:MCC/cubits/order_cubit.dart';
 import 'package:MCC/cubits/services_cubit.dart';
 import 'package:MCC/model/category.dart';
 import 'package:MCC/model/service.dart';
-import 'package:MCC/views/Service_detail_screen.dart';
 import 'package:MCC/views/serviceDetailsScreen.dart';
 import 'package:MCC/widgets/addingNewSerrviceDialog.dart';
 import 'package:MCC/widgets/homePageHelperWidgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import '../cubits/login_cubit.dart';
 import '../widgets/MyButtonW.dart';
 import '../widgets/leftappbarUpdate.dart';
@@ -187,7 +184,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                                             ],
                                           )),
                                 ),
-                              MyButton(text:'Add New Service',onClick:(){
+                              MyButton(text:'اضافة خدمة جديدة',onClick:(){
                                 showDialog(context: context, builder:(context)
                                   => AddingNewServiceDialog(widget.categoryy)
                                  );
