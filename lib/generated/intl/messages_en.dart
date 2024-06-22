@@ -82,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Sign_IN": MessageLookupByLibrary.simpleMessage("Sign in "),
         "Sign_Up": MessageLookupByLibrary.simpleMessage("Sign up "),
         "Sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),
-        "Text_Us": MessageLookupByLibrary.simpleMessage("Text Us"),
+        "Text_Us": MessageLookupByLibrary.simpleMessage("contact Us"),
         "Text_us_for_any_help_or_question":
             MessageLookupByLibrary.simpleMessage(
                 "Text us for any help or question"),
@@ -126,6 +126,40 @@ class MessageLookup extends MessageLookupByLibrary {
         "skip": MessageLookupByLibrary.simpleMessage("skip"),
         "then_get_best_prices_from_our_suppliers":
             MessageLookupByLibrary.simpleMessage(
-                "then get best prices from our suppliers")
+                "then get best prices from our suppliers"),
+        "username": MessageLookupByLibrary.simpleMessage("username"),
+        "ServiceName": MessageLookupByLibrary.simpleMessage("ServiceName"),
+        "address": MessageLookupByLibrary.simpleMessage("address"),
+        "description": MessageLookupByLibrary.simpleMessage("description"),
+        "you_have_been_logged_in_successfully":
+            MessageLookupByLibrary.simpleMessage(
+                "you have been logged in successfully"),
+        "please_write_your_email_in_a_good_way":
+            MessageLookupByLibrary.simpleMessage(
+                "please write your email in a good way"),
+        "password_must_be_8_char_at_least":
+            MessageLookupByLibrary.simpleMessage(
+                "password must be 8 char at least"),
+        "please_write_your_username":
+            MessageLookupByLibrary.simpleMessage("please write your username"),
+        "phone_number_must_be_11_char": MessageLookupByLibrary.simpleMessage(
+            "phone number must be 11 char"),
+        "please_write_your_address":
+            MessageLookupByLibrary.simpleMessage("please write your address"),
+        "you_have_been_logged_in_successfully":
+            MessageLookupByLibrary.simpleMessage(
+                "you have been logged in successfully"),
+        "Home_title1":
+            MessageLookupByLibrary.simpleMessage("Available for servicing"),
+        "Home_title2":
+            MessageLookupByLibrary.simpleMessage("every single time"),
+        "exit": MessageLookupByLibrary.simpleMessage("exit"),
+        "exit_mess":
+            MessageLookupByLibrary.simpleMessage("do you want to exit ?"),
+        "Click_here_to_log_in_toshowyourOrders":
+            MessageLookupByLibrary.simpleMessage("Click here to log in to show your orders"),
+             "You_are_already_logged_in":
+            MessageLookupByLibrary.simpleMessage("You are already logged in"),
       };
 }
+            
